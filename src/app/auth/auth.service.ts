@@ -1,7 +1,9 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, throwError } from "rxjs";
+import { Router } from "@angular/router";
+import { ReplaySubject, throwError } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
+import { User } from "../user/user.model";
 
 //defined at https://firebase.google.com/docs/reference/rest/auth#section-create-email-password
 //not a requirement of Angular, but makes life easier to have it defined in an interface
@@ -18,8 +20,10 @@ export interface AuthResponseData {
 //make this available application wide
 @Injectable({providedIn: 'root'})
 export class AuthService {
+    public user = new ReplaySubject<User>(1);
+    private tokenExpirationTimer: any;
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private router: Router) { }
 
     signUp(email: string, password: string) {
         return this.http.post<AuthResponseData>(
@@ -48,8 +52,48 @@ export class AuthService {
         ).pipe(
             tap(response => {
                 console.log(response);
+                this.handleAuth(response.email, response.localId, response.idToken, +response.expiresIn)
             })
         );
+    }
+
+    autoLogin() {
+        const userData: {
+            email: string,
+            id: string,
+            _token: string,
+            _tokenExpirationDate: string
+        } = JSON.parse(localStorage.getItem('userData'));
+        if (!userData) {
+            return;
+        }
+
+        const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate))
+        if (loadedUser.token) {
+            this.user.next(loadedUser);
+            const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
+            this.autoLogout(expirationDuration);
+        }
+    }
+
+    autoLogout(expirationDuration: number) {
+        this.tokenExpirationTimer = setTimeout(() => {
+            this.logout();
+        }, expirationDuration)
+    }
+
+    logout() {
+        this.user.next(null);
+        this.router.navigate(['/auth']);
+        localStorage.removeItem('userData');
+    }
+
+    handleAuth(email: string, userID: string, token: string, expiresIn: number) {
+        console.log(`${email} : ${userID}`)
+        const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+        const user = new User(email, userID, token, expirationDate);
+        this.user.next(user)
+        localStorage.setItem('userData', JSON.stringify(user));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

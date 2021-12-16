@@ -2,6 +2,7 @@ import { AuthService, AuthResponseData } from './auth.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,11 @@ export class AuthComponent implements OnInit, OnDestroy {
   authObservable: Observable<AuthResponseData>;
   isLoading = false;
   
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.authForm = new FormGroup({
@@ -56,6 +61,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.authObservable.subscribe(
       response => {
         console.log(response);
+        this.router.navigate(["/myprofile"]);
       },
       errorMessage => {
         console.log(errorMessage);
@@ -64,6 +70,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
     this.isLoading = false;
     this.authForm.reset();
+    this.signup = false;
   }
 
   ngOnDestroy(): void {

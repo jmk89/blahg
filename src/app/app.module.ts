@@ -6,12 +6,22 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthComponent } from './auth/auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserHeaderComponent } from './user-header/user-header.component';
+import { AboutComponent } from './about/about.component';
+import { HomeComponent } from './home/home.component';
+import { MyprofileComponent } from './myprofile/myprofile.component';
+import { NewpostComponent } from './newpost/newpost.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    AuthComponent
+    AuthComponent,
+    UserHeaderComponent,
+    AboutComponent,
+    HomeComponent,
+    MyprofileComponent,
+    NewpostComponent
   ],
   imports: [
     BrowserModule,
