@@ -25,7 +25,7 @@ export class PostService {
         let postObject = {'userID': userID, 'title': title, 'body': body}
         console.log(postObject)
         return this.http.post<PostData>(
-            "https://blahg-5b828-default-rtdb.firebaseio.com/posts.json",
+            `https://blahg-5b828-default-rtdb.firebaseio.com/${userID}/posts.json`,
             postObject
         ).pipe(
             catchError(this.handleError),
@@ -37,7 +37,7 @@ export class PostService {
 
     getPostsForUserID(userID: string) {
         return this.http.get<JankyFirebasePostData>(
-            'https://blahg-5b828-default-rtdb.firebaseio.com/posts.json'
+            `https://blahg-5b828-default-rtdb.firebaseio.com/${userID}/posts.json`
         ).pipe(
             tap(posts => {
                 // let j: JankyFirebasePostData = posts
