@@ -100,7 +100,7 @@ export class AuthService {
         let errorMessage = "An unknown error occurred"
         //check if the errorResponse has the expected object structure
         if (!errorResponse.error || !errorResponse.error.error) {
-            return throwError(errorMessage)
+            return throwError(() => new Error(errorMessage));
         }
         switch (errorResponse.error.error.message) {
             case 'EMAIL_EXISTS':
