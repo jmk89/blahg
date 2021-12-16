@@ -1,1 +1,12 @@
-<p>home works!</p>
+<h3>browse some blahg posts</h3>
+
+<div class="row" *ngFor="let post of posts">
+    <div class="card" style="width: 18rem; margin-top: 10px;">
+        <!-- <img src="..." class="card-img-top" alt="..."> -->
+        <div class="card-body">
+        <h5 class="card-title">{{post}}</h5>
+        <p class="card-text">some body text</p>
+        <a href="#" class="btn btn-primary">go to post</a>
+        </div>
+    </div>
+</div>
