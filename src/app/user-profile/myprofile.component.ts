@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
-import { User } from './../user/user.model';
-import { PostService, PostData, JankyFirebasePostData } from './../services/post.service';
+import { AuthUser } from '../shared/models/auth-user.model';
+import { PostService, PostData, JankyFirebasePostData } from '../shared/services/post.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
@@ -15,7 +15,7 @@ export class MyprofileComponent implements OnInit, OnDestroy {
   constructor(private postService: PostService) { }
 
   ngOnInit(): void {
-    const user: User = JSON.parse(localStorage.getItem('userData'));
+    const user: AuthUser = JSON.parse(localStorage.getItem('userData'));
     this.postsObservable = this.postService.getPostsForUserID(user.id);
     this.postsObservable
       .subscribe(response => {
@@ -23,14 +23,17 @@ export class MyprofileComponent implements OnInit, OnDestroy {
         //https://stackoverflow.com/questions/63293324/how-to-turn-a-firebase-rest-api-response-into-an-array-in-typescript
         //to help
         for (const [key, value] of Object.entries(response)) {
+          let post = (value as PostData)
+          post.postID = key;
           this.posts.push(value as PostData)
         }
-        console.log(this.posts)
+        this.posts.reverse();
+        // console.log(this.posts)
       })
   }
 
   ngOnDestroy(): void {
-      
+
   }
 
 }

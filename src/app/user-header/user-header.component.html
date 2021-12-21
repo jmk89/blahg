@@ -1,23 +1,33 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" routerLink="/home">
         <img src="../../assets/me.jpg" style="border-radius: 50%;" alt="" width="60" height="60" class="d-inline-block align-text-top">
       </a>
       <h3>{{user.email}}</h3>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      
-  
+
+
       <ul class="nav navbar-nav navbar-right">
         <div class="navbar-nav">
-            <a class="nav-link" aria-current="page" routerLink='/myprofile'>my posts</a>
+            <a class="nav-link" aria-current="page" routerLink='/profile'>my posts</a>
+
             <a class="nav-link" routerLink="/new">new post</a>
-          </div>
-        <li>
-            <button class="btn btn-primary" (click)="onLogout()">log out</button>
-        </li>
+        </div>
+
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary">settings</button>
+          <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="visually-hidden">Toggle Dropdown</span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" routerLink="/preferences">preferences</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" (click)="onLogout()">logout</a></li>
+          </ul>
+        </div>
       </ul>
-  
+
     </div>
   </nav>

@@ -1,4 +1,5 @@
-import { PostData, PostService } from './../services/post.service';
+import { FormControl } from '@angular/forms';
+import { PostData, PostService } from '../shared/services/post.service';
 
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -15,17 +16,24 @@ export class HomeComponent implements OnInit {
   constructor(private postsService: PostService) { }
 
   ngOnInit(): void {
-    this.postsObservable = this.postsService.getPosts();
+    this.postsObservable = this.postsService.getRecentPosts();
     this.postsObservable
       .subscribe(response => {
         //some jank from
         //https://stackoverflow.com/questions/63293324/how-to-turn-a-firebase-rest-api-response-into-an-array-in-typescript
         //to help
         for (const [key, value] of Object.entries(response)) {
-          this.posts.push(value as PostData)
+          let post = (value as PostData);
+          post.postID = key;
+          this.posts.push(value as PostData);
         }
-        console.log(this.posts)
+        this.posts.reverse();
+
       });
+  }
+
+  goToPost(f: FormControl) {
+    console.log(f);
   }
 
 }

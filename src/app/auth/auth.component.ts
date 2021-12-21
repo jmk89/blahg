@@ -15,16 +15,16 @@ export class AuthComponent implements OnInit, OnDestroy {
   authForm: FormGroup;
   authObservable: Observable<AuthResponseData>;
   isLoading = false;
-  
+
   constructor(
-    private formBuilder: FormBuilder, 
+    private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
     this.authForm = new FormGroup({
-      'email': new FormControl(null, 
+      'email': new FormControl(null,
         [
           Validators.required,
           Validators.email
@@ -49,10 +49,9 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     const email = this.authForm.controls['email'].value;
     const password = this.authForm.controls['password'].value;
-    
+
 
     if (this.signup) {
-      console.log('signup')
       this.authObservable = this.authService.signUp(email, password);
     } else {
       this.authObservable = this.authService.login(email, password);
@@ -60,8 +59,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
     this.authObservable.subscribe(
       response => {
-        console.log(response);
-        this.router.navigate(["/myprofile"]);
+        this.router.navigate(["/profile"]);
       },
       errorMessage => {
         console.log(errorMessage);
@@ -74,9 +72,9 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    
+
   }
 
-  
+
 
 }

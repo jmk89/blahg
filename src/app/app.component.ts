@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from './auth/auth.service';
-import { User } from './user/user.model';
+import { AuthUser } from './shared/models/auth-user.model';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   ]
 
   userSub: Subscription;
-  user: User;
+  user: AuthUser;
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
         this.user = user;
       });
     this.authService.autoLogin();
-    
+
   }
 
 

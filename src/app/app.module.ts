@@ -1,3 +1,4 @@
+import { DropdownDirective } from './shared/dropdown.directive';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
@@ -9,8 +10,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserHeaderComponent } from './user-header/user-header.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
-import { MyprofileComponent } from './myprofile/myprofile.component';
+import { MyprofileComponent } from './user-profile/myprofile.component';
 import { NewpostComponent } from './newpost/newpost.component';
+import { PreferencesComponent } from './user-profile/preferences/preferences.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { NewpostComponent } from './newpost/newpost.component';
     AboutComponent,
     HomeComponent,
     MyprofileComponent,
-    NewpostComponent
+    NewpostComponent,
+    DropdownDirective,
+    PreferencesComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +33,9 @@ import { NewpostComponent } from './newpost/newpost.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
+  ],
+  exports: [
+    DropdownDirective
   ],
   providers: [],
   bootstrap: [AppComponent]

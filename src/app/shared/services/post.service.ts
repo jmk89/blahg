@@ -5,7 +5,8 @@ import { catchError, map, tap, throwError } from 'rxjs';
 export interface PostData {
     userID: string,
     title: string,
-    body: string
+    body: string,
+    postID: string
 }
 
 export interface JankyFirebasePostData {
@@ -22,17 +23,29 @@ export class PostService {
     constructor(private http: HttpClient) { }
 
     createNewPost(userID: string, title: string, body: string) {
-        let postObject = {'userID': userID, 'title': title, 'body': body}
-        console.log(postObject)
-        return this.http.post<PostData>(
-            `https://blahg-5b828-default-rtdb.firebaseio.com/users/${userID}/posts.json`,
-            postObject
-        ).pipe(
-            catchError(this.handleError),
-            tap(response => {
-                console.log(response)
-            })
-        )
+      let postObject = {'userID': userID, 'title': title, 'body': body}
+      return this.http.post<PostData>(
+          `https://blahg-5b828-default-rtdb.firebaseio.com/users/${userID}/posts.json`,
+          postObject
+      ).pipe(
+          catchError(this.handleError),
+          tap(response => {
+              console.log(response)
+          })
+      )
+    }
+
+    createNewRecentPost(userID: string, title: string, body: string) {
+      let postObject = {'userID': userID, 'title': title, 'body': body}
+      return this.http.post<PostData>(
+          `https://blahg-5b828-default-rtdb.firebaseio.com/general/recentPosts.json`,
+          postObject
+      ).pipe(
+          catchError(this.handleError),
+          tap(response => {
+              console.log(response)
+          })
+      )
     }
 
     getPostsForUserID(userID: string) {
@@ -48,12 +61,12 @@ export class PostService {
         );
     }
 
-    getPosts() {
+    getRecentPosts() {
         return this.http.get(
-            "https://blahg-5b828-default-rtdb.firebaseio.com/users"
+            "https://blahg-5b828-default-rtdb.firebaseio.com/general/recentPosts.json"
         ).pipe(
             tap(posts => {
-                console.log(posts)
+
             })
         )
     }

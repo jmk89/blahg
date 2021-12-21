@@ -7,11 +7,12 @@
             <!-- <img src="..." class="card-img-top" alt="..."> -->
             <div class="card-body">
             <h5 class="card-title">{{post.title}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ post.postID }}</h6>
             <p class="card-text">{{ (post.body.length>48)? (post.body | slice:0:48)+' ...':(post.body) }}</p>
-            <a href="#" class="btn btn-primary">go to post</a>
+            <a class="btn btn-primary" (click)='goToPost()'>go to post</a>
             </div>
         </div>
-        
+
     </div>
 
 

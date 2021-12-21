@@ -1,14 +1,16 @@
+import { PreferencesComponent } from './user-profile/preferences/preferences.component';
 import { NewpostComponent } from './newpost/newpost.component';
-import { MyprofileComponent } from './myprofile/myprofile.component';
+import { MyprofileComponent } from './user-profile/myprofile.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { AuthComponent } from './auth/auth.component';
 
+
 const routes: Routes = [
-  { 
-    path: "auth",  
+  {
+    path: "auth",
     component: AuthComponent
   },
   {
@@ -20,8 +22,12 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: "myprofile",
+    path: "profile",
     component: MyprofileComponent
+  },
+  {
+    path: "preferences",
+    component: PreferencesComponent
   },
   {
     path: "new",
