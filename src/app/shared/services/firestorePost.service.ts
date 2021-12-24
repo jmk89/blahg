@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
-import { concatMap, from, map, Observable } from "rxjs";
+import { concatMap, from, map, Observable, tap } from "rxjs";
 import { convertSnaps } from "../db-utils";
 
 export interface PostData2 {
@@ -10,21 +10,32 @@ export interface PostData2 {
   postID?: number
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class FirestorePostService {
 
   constructor(private db: AngularFirestore) { }
 
-  getPosts() {
-    console.log('getting posts')
+  getRecentPosts(limit: number) {
+    console.log('getting top most recent posts')
     return this.db.collection(
-      'posts'
+      'posts',
+      ref => ref.orderBy('postID', 'desc').limit(limit)
     )
     .get()
     .pipe(
-      map(result => convertSnaps<any>(result))
+      map(result => convertSnaps<PostData2>(result)),
+      tap(result => console.log(result))
+    )
+  }
+
+  getUserPosts(user: string) {
+    return this.db.collection(
+      'posts',
+      ref => ref.where('userID', '==', user)
+    )
+    .get()
+    .pipe(
+      map(result => convertSnaps<PostData2>(result))
     )
   }
 

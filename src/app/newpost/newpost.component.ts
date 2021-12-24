@@ -2,7 +2,6 @@ import { FirestorePostService, PostData2 } from './../shared/services/firestoreP
 import { Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { AuthUser } from '../shared/models/auth-user.model';
-import { PostData, PostService } from '../shared/services/post.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -13,13 +12,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class NewpostComponent implements OnInit, OnDestroy {
   newPostForm: FormGroup;
-  userPostObservable: Observable<PostData>;
   userPostSubscription: Subscription;
-  recentPostObservable: Observable<PostData>;
   recentPostSubscription: Subscription;
 
   constructor(
-    private postService: PostService,
     private router: Router,
     private firestorePostService: FirestorePostService
   ) { }
@@ -40,27 +36,13 @@ export class NewpostComponent implements OnInit, OnDestroy {
         ]
       )
     });
-
-    this.firestorePostService.getPosts()
-      .subscribe(res => {
-        console.log(res);
-      });
   }
 
   onSubmit() {
     const title = this.newPostForm.controls['title'].value
     const body = this.newPostForm.controls['body'].value
     const user: AuthUser = JSON.parse(localStorage.getItem('userData'));
-    // this.userPostObservable = this.postService.createNewPost(user.id, title, body);
-    // this.recentPostObservable = this.postService.createNewRecentPost(user.id, title, body);
 
-    // this.userPostSubscription = this.userPostObservable.subscribe(response => {
-    //   console.log(response);
-    // })
-
-    // this.recentPostSubscription = this.recentPostObservable.subscribe(response => {
-    //   console.log(response);
-    // })
     const newPost: PostData2 = {
       userID: user.id,
       title: title,
