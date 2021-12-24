@@ -13,6 +13,16 @@ import { HomeComponent } from './home/home.component';
 import { MyprofileComponent } from './user-profile/myprofile.component';
 import { NewpostComponent } from './newpost/newpost.component';
 import { PreferencesComponent } from './user-profile/preferences/preferences.component';
+import {AngularFireAuthModule, USE_EMULATOR as USE_AUTH_EMULATOR} from '@angular/fire/compat/auth';
+import {AngularFirestoreModule, USE_EMULATOR as USE_FIRESTORE_EMULATOR} from '@angular/fire/compat/firestore';
+import {AngularFireFunctionsModule, USE_EMULATOR as USE_FUNCTIONS_EMULATOR} from '@angular/fire/compat/functions';
+import {environment} from '../environments/environment';
+import {AngularFireModule} from '@angular/fire/compat';
+import {AngularFireStorageModule} from '@angular/fire/compat/storage';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { provideFunctions,getFunctions } from '@angular/fire/functions';
 
 @NgModule({
   declarations: [
@@ -32,12 +42,21 @@ import { PreferencesComponent } from './user-profile/preferences/preferences.com
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireAuthModule,
+    AngularFireFunctionsModule
   ],
   exports: [
     DropdownDirective
   ],
-  providers: [],
+  providers: [
+    { provide: USE_AUTH_EMULATOR, useValue: environment.useEmulators ? ['http://localhost:9099'] : undefined },
+    { provide: USE_FIRESTORE_EMULATOR, useValue: environment.useEmulators ? ['localhost', 8080] : undefined },
+    { provide: USE_FUNCTIONS_EMULATOR, useValue: environment.useEmulators ? ['localhost', 5001] : undefined },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

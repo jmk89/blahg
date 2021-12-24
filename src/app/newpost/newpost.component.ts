@@ -1,3 +1,4 @@
+import { FirestorePostService, PostData2 } from './../shared/services/firestorePost.service';
 import { Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { AuthUser } from '../shared/models/auth-user.model';
@@ -19,7 +20,8 @@ export class NewpostComponent implements OnInit, OnDestroy {
 
   constructor(
     private postService: PostService,
-    private router: Router
+    private router: Router,
+    private firestorePostService: FirestorePostService
   ) { }
 
   ngOnInit(): void {
@@ -38,24 +40,34 @@ export class NewpostComponent implements OnInit, OnDestroy {
         ]
       )
     });
+
+    this.firestorePostService.getPosts()
+      .subscribe(res => {
+        console.log(res);
+      });
   }
 
   onSubmit() {
     const title = this.newPostForm.controls['title'].value
     const body = this.newPostForm.controls['body'].value
     const user: AuthUser = JSON.parse(localStorage.getItem('userData'));
-    this.userPostObservable = this.postService.createNewPost(user.id, title, body);
-    this.recentPostObservable = this.postService.createNewRecentPost(user.id, title, body);
+    // this.userPostObservable = this.postService.createNewPost(user.id, title, body);
+    // this.recentPostObservable = this.postService.createNewRecentPost(user.id, title, body);
 
-    this.userPostSubscription = this.userPostObservable.subscribe(response => {
-      console.log(response);
-    })
+    // this.userPostSubscription = this.userPostObservable.subscribe(response => {
+    //   console.log(response);
+    // })
 
-    console.log('submitted')
-
-    this.recentPostSubscription = this.recentPostObservable.subscribe(response => {
-      console.log(response);
-    })
+    // this.recentPostSubscription = this.recentPostObservable.subscribe(response => {
+    //   console.log(response);
+    // })
+    const newPost: PostData2 = {
+      userID: user.id,
+      title: title,
+      body: body
+    }
+    this.firestorePostService.addPost(newPost)
+      .subscribe(res => console.log(res));
 
     this.router.navigate(['/profile']);
   }
