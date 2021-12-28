@@ -18,20 +18,6 @@ export class MyprofileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const user: AuthUser = JSON.parse(localStorage.getItem('userData'));
-    // this.postsObservable = this.postService.getPostsForUserID(user.id);
-    // this.postsObservable
-    //   .subscribe(response => {
-    //     //some jank from
-    //     //https://stackoverflow.com/questions/63293324/how-to-turn-a-firebase-rest-api-response-into-an-array-in-typescript
-    //     //to help
-    //     for (const [key, value] of Object.entries(response)) {
-    //       let post = (value as PostData)
-    //       post.postID = key;
-    //       this.posts.push(value as PostData)
-    //     }
-    //     this.posts.reverse();
-    //     // console.log(this.posts)
-    //   })
     console.log('init')
     this.posts$ = this.firestorePostService.getUserPosts(user.id)
     this.posts$

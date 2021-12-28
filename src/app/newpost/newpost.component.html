@@ -1,6 +1,6 @@
-<h3>New Post</h3>
-
-<div class="row">
+<h1 class="page__title">new blahg</h1>
+<!--
+<div class="row post__container">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
         <form [formGroup]="newPostForm" (ngSubmit)="onSubmit()">
             <div class="row">
@@ -30,4 +30,34 @@
 
         </form>
     </div>
+</div> -->
+
+<div class="container-fluid post__container">
+  <form [formGroup]="newPostForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="input-group mb-3">
+            <span class="input-group-text col-2" id="inputGroup-sizing-default">Post Title</span>
+            <input
+                type="text"
+                class="form-control"
+                aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-default"
+                formControlName="title"
+            >
+          </div>
+    </div>
+    <div class="row">
+        <div class="input-group mb-3">
+            <span class="input-group-text col-2">Post Body</span>
+            <textarea
+                class="form-control"
+                aria-label="With textarea"
+                formControlName="body"
+            ></textarea>
+          </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+
+</form>
 </div>

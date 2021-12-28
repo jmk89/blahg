@@ -1,13 +1,16 @@
-<h3>recent blahg posts</h3>
+<h1 class="page__title">recent community blahgs</h1>
 
-<div class="row" #post *ngFor="let post of posts">
-    <div class="card" style="width: 18rem; margin-top: 10px;">
-        <!-- <img src="..." class="card-img-top" alt="..."> -->
-        <div class="card-body">
-          <h5 class="card-title">{{ post.title }}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{ post.userID }}</h6>
-          <p class="card-text">{{ post.body }}</p>
-          <a class="btn btn-primary" (click)="goToPost(post)">go to post</a>
-        </div>
-    </div>
+<div class="container-fluid">
+  <div class="row posts" #post *ngFor="let post of posts">
+      <div class="card">
+          <!-- <img src="..." class="card-img-top" alt="..."> -->
+          <div class="card-body">
+            <h2 class="card-title">{{ post.title }}</h2>
+            <hr>
+            <h6 class="card-subtitle mb-2">#{{ post.postID }}</h6>
+            <p class="card-text">{{ (post.body.length>56)? (post.body | slice:0:56)+' ...':(post.body) }}</p>
+            <a class="btn btn-primary" (click)="goToPost(post)">go to post</a>
+          </div>
+      </div>
+  </div>
 </div>

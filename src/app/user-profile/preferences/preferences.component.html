@@ -1,5 +1,5 @@
 
-<div class="col-xs-12 col-md-6 col-md-offset-3">
+<!-- <div class="col-xs-12 col-md-6 col-md-offset-3">
   <form [formGroup]="userPreferences" (ngSubmit)="onSubmit()">
     <div class="row">
       <div class="input-group mb-3">
@@ -42,4 +42,51 @@
     <button class="btn btn-primary" type="submit">save</button>
 
   </form>
+</div> -->
+
+<h1 class="page__title">user preferences</h1>
+<div class="container-fluid preferences__container">
+  <form [formGroup]="userPreferences" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="input-group mb-3">
+        <span class="input-group-text col-3" id="inputGroup-sizing-default">display name</span>
+        <input
+        id="displayName"
+        type="text"
+        class="form-control"
+        aria-label="Sizing example input"
+        aria-describedby="inputGroup-sizing-default"
+        formControlName="displayName">
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-group mb-3">
+        <span class="input-group-text col-3" id="inputGroup-sizing-default">bio</span>
+        <textarea
+        id="bio"
+        type="text"
+        class="form-control"
+        aria-label="With textarea"
+        formControlName="bio"></textarea>
+      </div>
+    </div>
+
+    public email
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+      <label class="form-check-label" for="flexRadioDefault1">
+        yeah
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+      <label class="form-check-label" for="flexRadioDefault2">
+        nah
+      </label>
+    </div>
+
+    <button class="btn btn-primary" type="submit">save</button>
+
+  </form>
+
 </div>

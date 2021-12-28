@@ -14,7 +14,32 @@ html, body {
   background-color: dodgerblue;
 }
 
+.header__logo-text {
+  color: white;
+}
+
 a {
   cursor: pointer;
+}
+
+.page__title {
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: coral;
+  border-color: coral;
+}
+
+.btn-primary:hover,
+.btn-primary:active {
+  background-color: white;
+  border-color: white;
+  color: black;
+}
+
+.nav-link {
+  font-weight: 600;
+  font-size: 1.5rem;
 }
 

@@ -1,0 +1,33 @@
+
+.posts {
+  width: 50vw;
+  margin: 0 auto;
+}
+
+.post {
+  width: 90%;
+  margin: 1rem auto;
+}
+
+.card {
+  border-radius: 1rem;
+}
+
+.card-title {
+  text-align: center;
+}
+
+.card-subtitle {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 2rem;
+  margin: 0.25rem;
+  padding: 0.5rem;
+  color: white;
+  border-radius: 8px;
+  background-color:rgb(201, 201, 201);
+  font-size: 0.75rem;
+  text-align: right;
+  z-index: 10;
+}
