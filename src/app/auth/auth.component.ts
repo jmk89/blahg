@@ -1,3 +1,4 @@
+import { UserPreferencesData, UserPreferencesService } from './../shared/services/user-preferences.service';
 import { AuthService, AuthResponseData } from './auth.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -14,11 +15,13 @@ export class AuthComponent implements OnInit, OnDestroy {
   signup = false;
   authForm: FormGroup;
   authObservable: Observable<AuthResponseData>;
+  userObservable: Observable<UserPreferencesData>;
   isLoading = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private userService: UserPreferencesService,
     private router: Router
   ) { }
 

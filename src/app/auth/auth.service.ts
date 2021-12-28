@@ -1,3 +1,4 @@
+import { UserPreferencesService } from './../shared/services/user-preferences.service';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
@@ -23,7 +24,11 @@ export class AuthService {
     public user = new ReplaySubject<AuthUser>(1);
     private tokenExpirationTimer: any;
 
-    constructor(private http: HttpClient, private router: Router) { }
+    constructor(
+      private http: HttpClient,
+      private router: Router,
+      private userService: UserPreferencesService
+      ) { }
 
     signUp(email: string, password: string) {
         return this.http.post<AuthResponseData>(
@@ -36,7 +41,8 @@ export class AuthService {
         ).pipe(
             catchError(this.handleError),
             tap(response => {
-                console.log(response);
+              this.handleAuth(response.email, response.localId, response.idToken, +response.expiresIn);
+              this.userService.createUserPreferences(response.localId).subscribe();
             })
         );
     }
@@ -93,6 +99,10 @@ export class AuthService {
         const user = new AuthUser(email, userID, token, expirationDate);
         this.user.next(user)
         localStorage.setItem('userData', JSON.stringify(user));
+    }
+
+    getLocalUserData(): AuthUser {
+      return JSON.parse(localStorage.getItem('userData'));
     }
 
     private handleError(errorResponse: HttpErrorResponse) {

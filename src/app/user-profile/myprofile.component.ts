@@ -18,7 +18,6 @@ export class MyprofileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const user: AuthUser = JSON.parse(localStorage.getItem('userData'));
-    console.log('init')
     this.posts$ = this.firestorePostService.getUserPosts(user.id)
     this.posts$
       .subscribe(res => {

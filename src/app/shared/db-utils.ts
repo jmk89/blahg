@@ -12,3 +12,4 @@ export function convertSnaps<T>(resultsCollection): T[] {
       }
   })
 }
+
