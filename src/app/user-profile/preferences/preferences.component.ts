@@ -26,7 +26,7 @@ export class PreferencesComponent implements OnInit, OnDestroy {
     this.userPreferences = new FormGroup({
       'displayName' : new FormControl(null, [Validators.minLength(3), Validators.maxLength(16)]),
       'publicEmail': new FormControl(true, Validators.required),
-      'bio': new FormControl('initial', Validators.maxLength(800)),
+      'bio': new FormControl(null, Validators.maxLength(800)),
 
     });
 
