@@ -5,9 +5,11 @@
       <div class="card">
           <!-- <img src="..." class="card-img-top" alt="..."> -->
           <div class="card-body">
+            <h6 *ngIf="post.postDate" class="mb-2 date">{{ (post.postDate)? (post.postDate.toDate() | date:'mediumDate') : "" }}</h6>
+            <h6 class="card-subtitle mb-2">{{ (post.userDisplayName)? post.userDisplayName : "" }}</h6>
             <h2 class="card-title">{{ post.title }}</h2>
             <hr>
-            <h6 class="card-subtitle mb-2">#{{ post.postID }}</h6>
+
             <p class="card-text">{{ (post.body.length>56)? (post.body | slice:0:56)+' ...':(post.body) }}</p>
             <a class="btn btn-primary" (click)="goToPost(post)">go to post</a>
           </div>

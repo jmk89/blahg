@@ -24,13 +24,13 @@ export class PreferencesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userPreferences = new FormGroup({
-      'displayName' : new FormControl(null, [Validators.minLength(3), Validators.maxLength(16)]),
+      'displayName' : new FormControl("", [Validators.minLength(3), Validators.maxLength(16)]),
       'publicEmail': new FormControl(true, Validators.required),
-      'bio': new FormControl(null, Validators.maxLength(800)),
+      'bio': new FormControl("", Validators.maxLength(800)),
 
     });
 
-    this.prefs$ = this.userPreferencesService.getUserPreferences(this.userID);
+    this.prefs$ = this.userPreferencesService.getUserPreferencesFromDB(this.userID);
     this.prefs$
       .subscribe(res => {
         this.prefs = res[0];
@@ -60,11 +60,8 @@ export class PreferencesComponent implements OnInit, OnDestroy {
       publicEmail: publicEmail,
       bio: bio
     }
-
     this.userPreferencesService.updateUserPreferences(userPrefs)
-      .subscribe(res => console.log(res));
-
-    // this.sub = this.userPreferencesService.saveFormPreferences(displayName, publicEmail, bio).subscribe();
+      .subscribe();
   }
 
 }

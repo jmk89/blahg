@@ -45,11 +45,12 @@ export class NewpostComponent implements OnInit, OnDestroy {
 
     const newPost: PostData2 = {
       userID: user.id,
+      postDate: new Date(),
       title: title,
       body: body
     }
     this.firestorePostService.addPost(newPost)
-      .subscribe(res => console.log(res));
+      .subscribe();
 
     this.router.navigate(['/profile']);
   }

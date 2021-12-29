@@ -21,7 +21,6 @@ export class MyprofileComponent implements OnInit, OnDestroy {
     this.posts$ = this.firestorePostService.getUserPosts(user.id)
     this.posts$
       .subscribe(res => {
-        console.log(res)
         this.posts = res;
       })
   }

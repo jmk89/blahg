@@ -42,7 +42,8 @@ export class AuthService {
             catchError(this.handleError),
             tap(response => {
               this.handleAuth(response.email, response.localId, response.idToken, +response.expiresIn);
-              this.userService.createUserPreferences(response.localId).subscribe();
+              this.userService.createUserPreferences(response.localId)
+                .subscribe();
             })
         );
     }
@@ -58,6 +59,7 @@ export class AuthService {
         ).pipe(
             tap(response => {
                 this.handleAuth(response.email, response.localId, response.idToken, +response.expiresIn)
+                this.userService.getUserPreferencesFromDB(response.localId).subscribe();
             })
         );
     }
@@ -91,10 +93,10 @@ export class AuthService {
         this.user.next(null);
         this.router.navigate(['/auth']);
         localStorage.removeItem('userData');
+        localStorage.removeItem('userPreferences');
     }
 
     handleAuth(email: string, userID: string, token: string, expiresIn: number) {
-        console.log(`${email} : ${userID}`)
         const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
         const user = new AuthUser(email, userID, token, expirationDate);
         this.user.next(user)

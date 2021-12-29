@@ -1,3 +1,5 @@
+import { AngularFirestoreCollection, AngularFirestoreCollectionGroup } from "@angular/fire/compat/firestore"
+import { map } from "rxjs"
 
 //separate database layer from application layer
 export function convertSnaps<T>(resultsCollection): T[] {
@@ -11,5 +13,9 @@ export function convertSnaps<T>(resultsCollection): T[] {
           ...<any>snapshot.data()
       }
   })
+}
+
+export function convertSnaps2<T>(resultsCollection: AngularFirestoreCollection) {
+  return resultsCollection.valueChanges()
 }
 

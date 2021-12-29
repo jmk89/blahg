@@ -1,4 +1,4 @@
-import { from, map, Observable } from 'rxjs';
+import { from, map, Observable, tap } from 'rxjs';
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AngularFirestore, AngularFirestoreDocument, DocumentSnapshot } from "@angular/fire/compat/firestore";
@@ -41,16 +41,25 @@ export class UserPreferencesService {
       bio: ""
     }
 
-    return from(this.db.doc(`users/${userID}`).set(newUser));
+    return from(this.db.doc(`users/${userID}`).set(newUser))
+      .pipe(
+        tap(() => {
+          this.getUserPreferencesFromDB(userID).subscribe();
+        })
+      );
   }
 
-  getUserPreferences(userID: string) {
+  getUserPreferencesFromDB(userID: string) {
     return this.db.collection(
       `users`,
       ref => ref.where('userID', '==', userID))
       .get()
       .pipe(
-        map(result => convertSnaps<UserPreferencesData>(result))
+        map(result => convertSnaps<UserPreferencesData>(result)),
+        tap(result => {
+          let userPrefs = result[0];
+          this.handleUserPreferences(userPrefs);
+        })
       );
 
   }
@@ -66,18 +75,23 @@ export class UserPreferencesService {
         return;
     }
 
-    const path = 'preferences';
     const userID = userData.id;
 
-    return from(this.db.doc<UserPreferencesData>(`users/${userID}`).update(prefs));
+    return from(this.db.doc<UserPreferencesData>(`users/${userID}`).update(prefs))
+      .pipe(
+        tap(() => {
+          this.handleUserPreferences(prefs);
+        })
+      );
+  }
 
-    //let userPrefObject = {userID: userData.id, displayName: displayName, publicEmail: publicEmail, bio: bio};
-    // return this.http.post<UserPreferencesData>(
-    //   `https://blahg-5b828-default-rtdb.firebaseio.com/users/${userPrefObject.userID}/preferences.json`,
-    //   userPrefObject
-    // )
+  handleUserPreferences(prefs: UserPreferencesData) {
+    localStorage.setItem('userPreferences', JSON.stringify(prefs));
+  }
 
-
+  displayNameGet() {
+    const data: UserPreferencesData = JSON.parse(localStorage.getItem('userPreferences'));
+    return data.displayName;
   }
 
 }
