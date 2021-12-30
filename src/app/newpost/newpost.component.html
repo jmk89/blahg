@@ -53,11 +53,12 @@
                 class="form-control"
                 aria-label="With textarea"
                 formControlName="body"
+                rows=4
             ></textarea>
           </div>
     </div>
 
-    <button class="btn btn-primary" type="submit">Submit</button>
+    <button class="btn btn-primary" type="submit" [disabled]="!newPostForm.valid" >Submit</button>
 
 </form>
 </div>

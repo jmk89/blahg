@@ -1,9 +1,14 @@
-import { UserPreferencesData, UserPreferencesService } from './../shared/services/user-preferences.service';
+import { UserPreferencesData } from './../shared/services/user-preferences.service';
 import { AuthService, AuthResponseData } from './auth.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import * as firebaseui from 'firebaseui';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
+import EmailAuthProvider = firebase.auth.EmailAuthProvider;
+import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
 
 
 @Component({
@@ -18,60 +23,41 @@ export class AuthComponent implements OnInit, OnDestroy {
   userObservable: Observable<UserPreferencesData>;
   isLoading = false;
 
+  ui: firebaseui.auth.AuthUI;
+
   constructor(
-    private formBuilder: FormBuilder,
     private authService: AuthService,
-    private userService: UserPreferencesService,
-    private router: Router
+    private router: Router,
+    private afAuth: AngularFireAuth
   ) { }
 
   ngOnInit(): void {
-    this.authForm = new FormGroup({
-      'email': new FormControl(null,
-        [
-          Validators.required,
-          Validators.email
-        ]),
-      'password': new FormControl(null,
-        [
-          Validators.required,
-          Validators.minLength(8)
-        ])
+    //angular fire auth returns a promise "app"
+    //which we then wait for it to return a firebase.app.App
+    //this means firebase sdk is initialized and ready to use.
+    this.afAuth.app.then(app => {
+      const uiConfig = {
+          signInOptions: [
+              EmailAuthProvider.PROVIDER_ID,
+              GoogleAuthProvider.PROVIDER_ID
+          ],
+          callbacks: {
+              //all references to this within LoginSuccessful will now correctly
+              //identify with this instance of the LoginComponent
+              signInSuccessWithAuthResult: this.onLoginSuccessful.bind(this)
+          }
+      };
+
+      this.ui = new firebaseui.auth.AuthUI(app.auth());
+      //select the css id
+      this.ui.start("#firebaseui-auth-container", uiConfig);
+      this.ui.disableAutoSignIn();
     });
   }
 
-  switchMode() {
-    this.signup = !this.signup;
-  }
-
-  onSubmit() {
-    //make http request
-    if (!this.authForm.valid || this.authForm.pristine || this.authForm.untouched) {
-      return;
-    }
-    this.isLoading = true;
-    const email = this.authForm.controls['email'].value;
-    const password = this.authForm.controls['password'].value;
-
-
-    if (this.signup) {
-      this.authObservable = this.authService.signUp(email, password);
-    } else {
-      this.authObservable = this.authService.login(email, password);
-    }
-
-    this.authObservable.subscribe(
-      response => {
-        this.router.navigate(["/profile"]);
-      },
-      errorMessage => {
-        console.log(errorMessage);
-      }
-    )
-
-    this.isLoading = false;
-    this.authForm.reset();
-    this.signup = false;
+  onLoginSuccessful(result) {
+    console.log('firebase ui result: ', result)
+    this.router.navigateByUrl('/profile');
   }
 
   ngOnDestroy(): void {

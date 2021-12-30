@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AngularFirestore, AngularFirestoreDocument, DocumentSnapshot } from "@angular/fire/compat/firestore";
 import { convertSnaps } from '../db-utils';
+import { FirebaseUser } from '../models/firebase-user.model';
 
 export interface UserPreferencesData {
   userID: string,
@@ -25,18 +26,18 @@ export class UserPreferencesService {
   createUserPreferences(userID: string): Observable<any> {
     const userData: {
       email: string,
-      id: string,
-      _token: string,
-      _tokenExpirationDate: string
-    } = JSON.parse(localStorage.getItem('userData'));
+      displayName: string,
+      pictureUrl: string,
+      uid: string
+    } = JSON.parse(localStorage.getItem('firebaseUserData'));
     if (!userData) {
         return;
     }
 
     const path = 'users';
     const newUser: UserPreferencesData = {
-      userID: userData.id,
-      displayName: "",
+      userID: userData.uid,
+      displayName: userData.displayName,
       publicEmail: false,
       bio: ""
     }
@@ -67,15 +68,15 @@ export class UserPreferencesService {
   updateUserPreferences(prefs: UserPreferencesData) {
     const userData: {
       email: string,
-      id: string,
-      _token: string,
-      _tokenExpirationDate: string
-    } = JSON.parse(localStorage.getItem('userData'));
+      displayName: string,
+      pictureUrl: string,
+      uid: string
+    } = JSON.parse(localStorage.getItem('firebaseUserData'));
     if (!userData) {
         return;
     }
 
-    const userID = userData.id;
+    const userID = userData.uid;
 
     return from(this.db.doc<UserPreferencesData>(`users/${userID}`).update(prefs))
       .pipe(
@@ -90,7 +91,7 @@ export class UserPreferencesService {
   }
 
   displayNameGet() {
-    const data: UserPreferencesData = JSON.parse(localStorage.getItem('userPreferences'));
+    const data: FirebaseUser = JSON.parse(localStorage.getItem('firebaseUserData'));
     return data.displayName;
   }
 

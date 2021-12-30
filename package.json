@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "local-dev": "firebase emulators:start --only firestore"
+    "local-dev": "firebase emulators:start --only firestore,auth --import test-data"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +23,7 @@
     "bootstrap": "^5.1.3",
     "bootstrap-icons": "^1.7.2",
     "firebase": "^9.4.0",
+    "firebaseui": "^6.0.0",
     "rxfire": "^6.0.0",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",

@@ -2,6 +2,7 @@ import { FirestorePostService, PostData2 } from './../shared/services/firestoreP
 import { Observable } from 'rxjs';
 import { AuthUser } from '../shared/models/auth-user.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FirebaseUser } from '../shared/models/firebase-user.model';
 
 @Component({
   selector: 'app-myprofile',
@@ -17,8 +18,8 @@ export class MyprofileComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    const user: AuthUser = JSON.parse(localStorage.getItem('userData'));
-    this.posts$ = this.firestorePostService.getUserPosts(user.id)
+    const user: FirebaseUser = JSON.parse(localStorage.getItem('firebaseUserData'));
+    this.posts$ = this.firestorePostService.getUserPosts(user.uid)
     this.posts$
       .subscribe(res => {
         this.posts = res;

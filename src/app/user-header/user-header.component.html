@@ -3,33 +3,22 @@
       <a class="navbar-brand" routerLink="/home">
         <h3 class="header__logo-text">blahget</h3>
       </a>
-      <h3>{{user.email}}</h3>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <h4 class="username">{{username | lowercase}}</h4>
 
-
-      <ul class="nav navbar-nav navbar-right">
-        <div class="navbar-nav">
-            <a class="nav-link" aria-current="page" routerLink='/profile'>my blahgs</a>
-            <a class="nav-link" routerLink="/new">new blahg</a>
-        </div>
-
-        <div class="btn-group dropstart">
-          <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="../../assets/me.jpg" alt="" class="d-inline-block align-text-top avatar">
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" routerLink="/preferences">preferences</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" (click)="onLogout()">logout</a></li>
-          </ul>
-        </div>
-
-
-
-
-      </ul>
+      <div class="btn-group dropstart">
+        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="../../assets/me.jpg" alt="" class="d-inline-block align-text-top avatar">
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" routerLink="/new">new</a></li>
+          <li><a class="dropdown-item" routerLink="/profile">profile</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" routerLink="/preferences">preferences</a></li>
+          <li><a class="dropdown-item" (click)="onLogout()">logout</a></li>
+        </ul>
+      </div>
 
     </div>
-  </nav>
+</nav>
+
+

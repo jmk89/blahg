@@ -32,10 +32,16 @@ a {
 }
 
 .btn-primary:hover,
-.btn-primary:active {
+.btn-primary:active,
+.btn-primary:focus {
   background-color: white;
   border-color: white;
   color: black;
+}
+
+.btn-primary:disabled {
+  background-color: slategrey;
+  border-color: slategrey;
 }
 
 .nav-link {

@@ -33,7 +33,9 @@ export class FirestorePostService {
 
   getUserPosts(user: string) {
     return this.db.collection(
-      `users/${user}/posts`)
+      `users/${user}/posts`,
+      ref => ref.orderBy('postID', 'desc')
+    )
     .get()
     .pipe(
       map(result => convertSnaps<PostData2>(result))
@@ -59,7 +61,6 @@ export class FirestorePostService {
           ...newPost,
           userDisplayName: this.userPrefs.displayNameGet()
         }
-        console.log(newAllPost)
         //just throw this in the "all posts" section to display on
         //front page
         from(this.db.collection('posts').add(newAllPost)).subscribe();

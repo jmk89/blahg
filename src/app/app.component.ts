@@ -1,3 +1,4 @@
+import { UserService } from './shared/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from './auth/auth.service';
@@ -10,16 +11,12 @@ import { AuthUser } from './shared/models/auth-user.model';
 })
 export class AppComponent implements OnInit {
   title = 'Blahg';
-  posts = [
-    { name: "Post 1", content: "the first few words", date: new Date("2021-12-01") },
-    { name: "Post 2", content: "some intro words", date: new Date("2021-12-02") },
-    { name: "Post 3", content: "a hot take woah", date: new Date("2021-12-03") },
-    { name: "Post 4", content: "testing waters", date: new Date("2021-12-04") },
-  ]
-
   userSub: Subscription;
   user: AuthUser;
-  constructor(private authService: AuthService) {}
+  loggedIn: boolean;
+  constructor(
+    private authService: AuthService,
+    private userService: UserService) {}
 
   ngOnInit() {
     this.userSub = this.authService.user
@@ -27,6 +24,13 @@ export class AppComponent implements OnInit {
         this.user = user;
       });
     this.authService.autoLogin();
+
+    this.userService.isLoggedIn$
+      .subscribe(
+        loggedIn => this.loggedIn = loggedIn
+      );
+    this.userService.userData$
+      .subscribe();
 
   }
 

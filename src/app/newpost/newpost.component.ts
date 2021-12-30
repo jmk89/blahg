@@ -4,6 +4,7 @@ import { Subscription, Observable } from 'rxjs';
 import { AuthUser } from '../shared/models/auth-user.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FirebaseUser } from '../shared/models/firebase-user.model';
 
 @Component({
   selector: 'app-newpost',
@@ -41,10 +42,9 @@ export class NewpostComponent implements OnInit, OnDestroy {
   onSubmit() {
     const title = this.newPostForm.controls['title'].value
     const body = this.newPostForm.controls['body'].value
-    const user: AuthUser = JSON.parse(localStorage.getItem('userData'));
-
+    const user: FirebaseUser = JSON.parse(localStorage.getItem('firebaseUserData'));
     const newPost: PostData2 = {
-      userID: user.id,
+      userID: user.uid,
       postDate: new Date(),
       title: title,
       body: body

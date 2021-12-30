@@ -1,5 +1,5 @@
-<app-user-header *ngIf="user" [user]="user"></app-user-header>
-<app-header *ngIf="!user"></app-header>
+<app-user-header *ngIf="loggedIn"></app-user-header>
+<app-header *ngIf="!loggedIn"></app-header>
 
 <router-outlet></router-outlet>
 
@@ -12,6 +12,6 @@
         <p class="card-text">{{ post.content }}</p>
       </div>
     </div>
-    
+
   </div>
 </div> -->

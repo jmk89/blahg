@@ -1,6 +1,7 @@
 import { AuthService } from './../auth/auth.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { AuthUser } from '../shared/models/auth-user.model';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
   selector: 'app-user-header',
@@ -8,16 +9,16 @@ import { AuthUser } from '../shared/models/auth-user.model';
   styleUrls: ['./user-header.component.css']
 })
 export class UserHeaderComponent implements OnInit {
-  @Input('user') user: AuthUser;
+  username: string;
 
-  constructor(private authService: AuthService) { }
+  constructor(private user: UserService) { }
 
   ngOnInit(): void {
-
+    this.username = this.user.getLocalUserData().displayName;
   }
 
   onLogout() {
-    this.authService.logout();
+    this.user.logout();
   }
 
 }

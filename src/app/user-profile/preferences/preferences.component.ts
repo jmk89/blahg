@@ -1,3 +1,4 @@
+import { UserService, UserData } from './../../shared/services/user.service';
 import { Subscription, Observable } from 'rxjs';
 import { UserPreferencesData, UserPreferencesService } from './../../shared/services/user-preferences.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -13,13 +14,12 @@ export class PreferencesComponent implements OnInit, OnDestroy {
   userPreferences: FormGroup;
   prefs$: Observable<UserPreferencesData[]>;
   prefs: UserPreferencesData;
-  userID;
+  userData: UserData;
 
   constructor(
     private userPreferencesService: UserPreferencesService,
-    private authService: AuthService) {
-      const userData = this.authService.getLocalUserData();
-      this.userID = userData.id;
+    private user: UserService) {
+      this.userData = this.user.getLocalUserData();
      }
 
   ngOnInit(): void {
@@ -30,13 +30,19 @@ export class PreferencesComponent implements OnInit, OnDestroy {
 
     });
 
-    this.prefs$ = this.userPreferencesService.getUserPreferencesFromDB(this.userID);
+    this.prefs$ = this.userPreferencesService.getUserPreferencesFromDB(this.userData.uid);
+    if (!this.prefs$) {
+      this.userPreferencesService.createUserPreferences(this.userData.uid).subscribe();
+      this.prefs$ = this.userPreferencesService.getUserPreferencesFromDB(this.userData.uid);
+      console.log('here');
+    }
+
     this.prefs$
       .subscribe(res => {
         this.prefs = res[0];
         this.userPreferences.setValue(
           {
-            displayName: this.prefs.displayName,
+            displayName: this.userPreferencesService.displayNameGet(),
             publicEmail: this.prefs.publicEmail,
             bio: this.prefs.bio
           }
@@ -55,7 +61,7 @@ export class PreferencesComponent implements OnInit, OnDestroy {
     const bio = this.userPreferences.controls['bio'].value;
 
     const userPrefs: UserPreferencesData = {
-      userID: this.userID,
+      userID: this.userData.uid,
       displayName: displayName,
       publicEmail: publicEmail,
       bio: bio
