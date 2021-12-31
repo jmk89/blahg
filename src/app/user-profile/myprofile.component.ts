@@ -22,7 +22,7 @@ export class MyprofileComponent implements OnInit, OnDestroy {
   posts$: Observable<PostData2[]>;
   posts: PostData2[] = [];
   prefs$: Observable<UserPreferencesData>;
-  prefs: UserPreferencesData;
+
   user: FirebaseUser;
 
   constructor(
@@ -39,13 +39,8 @@ export class MyprofileComponent implements OnInit, OnDestroy {
     this.prefs$ = this.userPreferences.updateLocalStorageWithDBPrefs(
       this.userService.getLocalUserData().uid
     );
-    this.prefs$.subscribe(res => {
-      this.prefs = res;
-    })
+    this.prefs$.subscribe();
 
-    // this.prefs = <UserPreferencesData>(
-    //   JSON.parse(localStorage.getItem('userPreferences'))
-    // );
   }
 
   ngOnInit(): void {}

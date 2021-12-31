@@ -34,7 +34,6 @@ export class PreferencesComponent implements OnInit, OnDestroy {
     if (!this.prefs$) {
       this.userPreferencesService.createUserPreferences(this.userData.uid).subscribe();
       this.prefs$ = this.userPreferencesService.updateLocalStorageWithDBPrefs(this.userData.uid);
-      console.log('here');
     }
 
     this.prefs$

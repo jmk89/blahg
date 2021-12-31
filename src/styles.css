@@ -12,11 +12,11 @@ html, body {
 }
 
 .header-background {
-  background-color: dodgerblue;
+  background-color:rgb(238, 238, 238);
 }
 
 .header__logo-text {
-  color: white;
+  color: black;
 }
 
 a {

@@ -58,7 +58,6 @@ export class UserPreferencesService {
       .pipe(
         map(result => convertSnaps<UserPreferencesData>(result)[0]),
         tap(result => {
-          console.log("result from db", result)
           let userPrefs = result;
           this.handleUserPreferences(userPrefs);
         })

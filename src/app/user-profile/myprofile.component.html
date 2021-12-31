@@ -2,10 +2,12 @@
 
 <div class="user-info__container">
   <div class="user-info">
-    <h2 class="user-info-name">{{ prefs.displayName }}</h2>
-    <h6 class="user-info-bio">"{{ prefs.bio }}"</h6>
-    <h6 class="user-info-lastPostDate">Dec 30, 2021</h6>
-    <h6 class="user-info-misc">misc info</h6>
+    <ng-container *ngIf="prefs$ | async as preferences">
+      <h2 class="user-info-name">{{ preferences.displayName }}</h2>
+      <h6 class="user-info-bio">"{{ preferences.bio }}"</h6>
+      <h6 class="user-info-lastPostDate">Dec 30, 2021</h6>
+      <h6 class="user-info-misc">misc info</h6>
+    </ng-container>
   </div>
 </div>
 
