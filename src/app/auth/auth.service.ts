@@ -59,7 +59,7 @@ export class AuthService {
         ).pipe(
             tap(response => {
                 this.handleAuth(response.email, response.localId, response.idToken, +response.expiresIn)
-                this.userService.getUserPreferencesFromDB(response.localId).subscribe();
+                this.userService.updateLocalStorageWithDBPrefs(response.localId).subscribe();
             })
         );
     }

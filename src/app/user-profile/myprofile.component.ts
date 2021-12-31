@@ -1,3 +1,4 @@
+
 import {
   FirestorePostService,
   PostData2,
@@ -6,7 +7,11 @@ import { Observable } from 'rxjs';
 import { AuthUser } from '../shared/models/auth-user.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FirebaseUser } from '../shared/models/firebase-user.model';
-import { UserPreferencesData, UserPreferencesService } from '../shared/services/user-preferences.service';
+import {
+  UserPreferencesData,
+  UserPreferencesService,
+} from '../shared/services/user-preferences.service';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
   selector: 'app-myprofile',
@@ -16,24 +21,34 @@ import { UserPreferencesData, UserPreferencesService } from '../shared/services/
 export class MyprofileComponent implements OnInit, OnDestroy {
   posts$: Observable<PostData2[]>;
   posts: PostData2[] = [];
-  prefs: UserPreferencesData
+  prefs$: Observable<UserPreferencesData>;
+  prefs: UserPreferencesData;
+  user: FirebaseUser;
 
   constructor(
     private firestorePostService: FirestorePostService,
-    private userPrefs: UserPreferencesService
-  ) {}
-
-  ngOnInit(): void {
-    const user: FirebaseUser = JSON.parse(
-      localStorage.getItem('firebaseUserData')
-    );
-    this.posts$ = this.firestorePostService.getUserPosts(user.uid);
+    private userService: UserService,
+    private userPreferences: UserPreferencesService
+  ) {
+    this.user = JSON.parse(localStorage.getItem('firebaseUserData'));
+    this.posts$ = this.firestorePostService.getUserPosts(this.user.uid);
     this.posts$.subscribe((res) => {
       this.posts = res;
     });
 
-    this.prefs = <UserPreferencesData>JSON.parse(localStorage.getItem('userPreferences'));
+    this.prefs$ = this.userPreferences.updateLocalStorageWithDBPrefs(
+      this.userService.getLocalUserData().uid
+    );
+    this.prefs$.subscribe(res => {
+      this.prefs = res;
+    })
+
+    // this.prefs = <UserPreferencesData>(
+    //   JSON.parse(localStorage.getItem('userPreferences'))
+    // );
   }
+
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {}
 }

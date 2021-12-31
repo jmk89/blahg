@@ -45,20 +45,21 @@ export class UserPreferencesService {
     return from(this.db.doc(`users/${userID}`).set(newUser))
       .pipe(
         tap(() => {
-          this.getUserPreferencesFromDB(userID).subscribe();
+          this.updateLocalStorageWithDBPrefs(userID).subscribe();
         })
       );
   }
 
-  getUserPreferencesFromDB(userID: string) {
+  updateLocalStorageWithDBPrefs(userID: string) {
     return this.db.collection(
       `users`,
       ref => ref.where('userID', '==', userID))
       .get()
       .pipe(
-        map(result => convertSnaps<UserPreferencesData>(result)),
+        map(result => convertSnaps<UserPreferencesData>(result)[0]),
         tap(result => {
-          let userPrefs = result[0];
+          console.log("result from db", result)
+          let userPrefs = result;
           this.handleUserPreferences(userPrefs);
         })
       );

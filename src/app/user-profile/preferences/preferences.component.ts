@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class PreferencesComponent implements OnInit, OnDestroy {
   userPreferences: FormGroup;
-  prefs$: Observable<UserPreferencesData[]>;
+  prefs$: Observable<UserPreferencesData>;
   prefs: UserPreferencesData;
   userData: UserData;
 
@@ -30,16 +30,16 @@ export class PreferencesComponent implements OnInit, OnDestroy {
 
     });
 
-    this.prefs$ = this.userPreferencesService.getUserPreferencesFromDB(this.userData.uid);
+    this.prefs$ = this.userPreferencesService.updateLocalStorageWithDBPrefs(this.userData.uid);
     if (!this.prefs$) {
       this.userPreferencesService.createUserPreferences(this.userData.uid).subscribe();
-      this.prefs$ = this.userPreferencesService.getUserPreferencesFromDB(this.userData.uid);
+      this.prefs$ = this.userPreferencesService.updateLocalStorageWithDBPrefs(this.userData.uid);
       console.log('here');
     }
 
     this.prefs$
       .subscribe(res => {
-        this.prefs = res[0];
+        this.prefs = res;
         this.userPreferences.setValue(
           {
             displayName: this.userPreferencesService.displayNameGet(),
