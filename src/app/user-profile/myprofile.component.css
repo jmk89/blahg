@@ -8,29 +8,35 @@
 
 .user-info__container {
   position: fixed;
-  width: 20vw;
+  width: 30vw;
 }
 
 .user-info {
   display: grid;
   padding-left: 1rem;
   grid-template-columns: 1fr;
-  grid-template-rows: 2rem 1rem 1rem 1rem;
-  grid-template-areas: "user-info-name" "user-info-bio" "user-info-lastPostDate" "user-info-misc";
+  grid-template-rows: 2rem 1rem auto 1rem;
+  grid-template-areas: "user-info-name" "user-info-lastPostDate" "user-info-bio"  "user-info-misc";
   grid-row-gap: .5rem;
   justify-content: center;
+  font-family: "Roboto";
+  font-weight: 300;
 }
 
 .user-info-name {
   grid-area: user-info-name;
-  justify-self: center;
 }
 
 .user-info-bio {
+  font-size: 0.9rem;
+  font-weight: 200;
+  font-family: "Roboto Mono";
   grid-area: user-info-bio;
 }
 
 .user-info-lastPostDate {
+  font-weight: 100;
+  font-style: italic;
   grid-area: user-info-lastPostDate
 }
 
@@ -39,10 +45,9 @@
 }
 
 .posts {
-  width: 80vw;
-  margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  justify-self: center;
+  grid-template-columns: repeat(2, minmax(30%, 30rem));
 }
 
 .post {
