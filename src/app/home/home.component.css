@@ -1,38 +1,65 @@
 
 .posts {
-  width: 50vw;
+  width: 80vw;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .post {
   width: 90%;
+  height: 16rem;
   margin: 1rem auto;
 }
 
 .card {
   border-radius: 1rem;
+  height: 90%;
+}
+
+.card:hover,
+.card:active,
+.card:focus {
+  cursor: pointer;
+  box-shadow: 6px 6px 12px rgba(122, 122, 122, 0.15);
+}
+
+.card-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 2rem 4rem 1fr 2.5rem;
+  grid-template-areas: "date name"
+                       "title title"
+                       "preview preview"
+                       "button .";
 }
 
 .card-title {
-  text-align: center;
-  margin-top: 1rem;
+  grid-area: title;
+  justify-self: center;
+  font-family: "Roboto";
+  font-weight: 400;
 }
 
-.card-subtitle {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  max-width: 14rem;
-  margin: 0.25rem;
-  padding: 0.5rem;
-  color: black;
+.name {
   font-size: 0.75rem;
   text-align: right;
-  z-index: 10;
+  grid-area: name;
+  color: rgb(0, 0, 0);
+  font-family: "Roboto";
+  font-weight: 100;
 }
 
 .date {
   font-size: 0.75rem;
   text-align: left;
-  left: 0px;
+  grid-area: date;
+  color: rgba(0, 0, 0, 0.5);
+  font-family: "Roboto";
+  font-weight: 100;
+  font-style: italic;
+}
+
+.card-text {
+  grid-area: preview;
 }
