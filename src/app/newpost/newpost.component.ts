@@ -1,4 +1,4 @@
-import { FirestorePostService, PostData2 } from './../shared/services/firestorePost.service';
+import { FirestorePostService, PostData2 } from '../shared/services/firestorePost.service';
 import { Router } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { AuthUser } from '../shared/models/auth-user.model';

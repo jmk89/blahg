@@ -1,5 +1,43 @@
 
 
+
+.page {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+}
+
+.user-info__container {
+  position: fixed;
+  width: 20vw;
+}
+
+.user-info {
+  display: grid;
+  padding-left: 1rem;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2rem 1rem 1rem 1rem;
+  grid-template-areas: "user-info-name" "user-info-bio" "user-info-lastPostDate" "user-info-misc";
+  grid-row-gap: .5rem;
+  justify-content: center;
+}
+
+.user-info-name {
+  grid-area: user-info-name;
+  justify-self: center;
+}
+
+.user-info-bio {
+  grid-area: user-info-bio;
+}
+
+.user-info-lastPostDate {
+  grid-area: user-info-lastPostDate
+}
+
+.user-info-misc {
+  grid-area: user-info-misc;
+}
+
 .posts {
   width: 80vw;
   margin: 0 auto;
@@ -10,7 +48,7 @@
 .post {
   width: 90%;
   height: 16rem;
-  margin: 1rem auto;
+  margin: 0.5rem auto;
 }
 
 .card {
