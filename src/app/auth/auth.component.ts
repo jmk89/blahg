@@ -52,6 +52,7 @@ export class AuthComponent implements OnInit, OnDestroy {
       //select the css id
       this.ui.start("#firebaseui-auth-container", uiConfig);
       this.ui.disableAutoSignIn();
+
     });
   }
 
@@ -61,7 +62,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-
+    if (this.ui) this.ui.delete();
   }
 
 
