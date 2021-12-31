@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
-import { map, Observable, tap } from 'rxjs';
+import { filter, map, Observable, tap } from 'rxjs';
 import { UserRoles } from '../models/user-roles';
 import firebase from 'firebase/compat/app';
 import { FirebaseUser } from '../models/firebase-user.model';
@@ -45,6 +45,8 @@ export class UserService {
         )
       this.userData$ = afAuth.user
         .pipe(
+          //the epic filter
+          filter(user => !!user),
           map(user => {
             return <UserData>{
               email: user.email,
@@ -66,6 +68,8 @@ export class UserService {
      logout() {
        this.afAuth.signOut();
        this.router.navigateByUrl('/home');
+       localStorage.removeItem('firebaseUserData');
+      localStorage.removeItem('userPreferences');
      }
 
      getLocalUserData(): UserData {
