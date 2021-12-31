@@ -12,7 +12,7 @@ html, body {
 }
 
 .header-background {
-  background-color:rgb(238, 238, 238);
+  background-color:rgb(236, 236, 247);
 }
 
 .header__logo-text {
@@ -25,6 +25,7 @@ a {
 
 .page__title {
   text-align: center;
+  color:rgb(159, 168, 173)
 }
 
 .btn-primary {
