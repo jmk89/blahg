@@ -1,0 +1,16 @@
+#body__gradient {
+  width: 100vw;
+  height: 40vh;
+  position: relative;
+  background-image: radial-gradient(ellipse at top right, coral, transparent 66%),
+                    radial-gradient(ellipse at top, mediumslateblue, transparent 100%),
+                    radial-gradient(ellipse at -66% 20%, mediumvioletred, transparent 66%),
+                    radial-gradient(ellipse at 33% 150%, mediumorchid, transparent 100%);
+}
+
+.blahg-overview__slogan {
+  position: absolute;
+  right: 17.25%;
+  top: 17.25%;
+  color: white;
+}

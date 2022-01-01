@@ -1,7 +1,42 @@
+body {
+  overflow: hidden;
+}
+
+main {
+  display: grid;
+  grid-template-rows: 30rem 40vh 100rem;
+  grid-template-areas: "greeting" "gradient" "posts-content";
+}
+
+#hi {
+  grid-area: greeting;
+  align-self: center;
+  justify-self: center;
+}
+
+#body__gradient {
+  width: 100vw;
+  background-image: radial-gradient(circle at 66% -166%, darkcyan, transparent 100%),
+                    radial-gradient(ellipse at 133% 133%, gold, transparent 100%),
+                    /* radial-gradient(circle at 66% 33%, gold, transparent 100%), */
+                    radial-gradient(ellipse at 33% 66%, cadetblue, transparent 100%);
+  grid-area: gradient;
+}
+
+#title {
+  color: white;
+}
+
+#subtitle {
+  color: white;
+}
+
+#posts {
+  grid-area: posts-content;
+}
 
 .posts {
-  width: 80vw;
-  margin: 0 auto;
+  grid-area: posts-content;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }

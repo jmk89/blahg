@@ -1,22 +1,53 @@
-<h1 class="page__title">recent community blahgs</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>home</title>
+  </head>
+  <body>
+    <main>
+      <section id="hi">
+        <h1 class="greeting">hi</h1>
+      </section>
 
-<div class="container-fluid">
-  <div class="posts">
-    <div class="post" #post *ngFor="let post of posts">
-      <div class="card" (click)="goToPost(post)">
-          <!-- <img src="..." class="card-img-top" alt="..."> -->
-          <div class="card-body">
-            <h6 *ngIf="post.postDate" class="mb-2 date">{{ (post.postDate)? (post.postDate.toDate() | date:'mediumDate') : "" }}</h6>
-            <h6 class="mb-2 name">{{ (post.userDisplayName)? post.userDisplayName : "" }}</h6>
-            <h2 class="card-title mb-2">{{ post.title }} </h2>
+      <section id="body__gradient">
+        <h1 id="title">recent blahgs</h1>
+        <p id="subtitle">blahg blahg blahg</p>
+      </section>
 
+      <section id="posts">
+        <div class="posts">
+          <div class="post" #post *ngFor="let post of posts">
+            <div class="card" (click)="goToPost(post)">
+              <!-- <img src="..." class="card-img-top" alt="..."> -->
+              <div class="card-body">
+                <h6 *ngIf="post.postDate" class="mb-2 date">
+                  {{
+                    post.postDate
+                      ? (post.postDate.toDate() | date: "mediumDate")
+                      : ""
+                  }}
+                </h6>
+                <h6 class="mb-2 name">
+                  {{ post.userDisplayName ? post.userDisplayName : "" }}
+                </h6>
+                <h2 class="card-title mb-2">{{ post.title }}</h2>
 
-            <p class="card-text">{{ (post.body.length>56)? (post.body | slice:0:56)+' ...':(post.body) }}</p>
-            <!-- <a class="btn btn-primary" (click)="goToPost(post)">go to post</a> -->
+                <p class="card-text">
+                  {{
+                    post.body.length > 56
+                      ? (post.body | slice: 0:56) + " ..."
+                      : post.body
+                  }}
+                </p>
+                <!-- <a class="btn btn-primary" (click)="goToPost(post)">go to post</a> -->
+              </div>
+            </div>
           </div>
-      </div>
-  </div>
-</div>
-
-  </div>
-
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

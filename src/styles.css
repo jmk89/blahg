@@ -4,15 +4,26 @@
 /* global selector */
 html, body {
    box-sizing: border-box;
-   width: 100%;
-   height: 100%;
+   /* width: 100%; */
+   /* height: 100%; */
    margin: 0px;
    padding: 0px;
    overflow-x: hidden;
 }
 
+#content {
+  margin-top: 5rem;
+}
+
+.app-header {
+  position: fixed;
+  width: 100vw;
+  z-index: 5;
+}
+
 .header-background {
-  background-color:rgb(236, 236, 247);
+  background-color:rgba(236, 236, 247, 0.541);
+  backdrop-filter: blur(5px);
 }
 
 .header__logo-text {
@@ -25,7 +36,8 @@ a {
 
 .page__title {
   text-align: center;
-  color:rgb(159, 168, 173)
+  color:rgb(159, 168, 173);
+  z-index: 5;
 }
 
 .btn-primary {
