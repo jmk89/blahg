@@ -14,21 +14,40 @@ main {
   justify-self: center;
 }
 
-#body__gradient {
+.greeting {
+  font-size: 6rem;
+}
+
+.greeting__subtext {
+  font-size: 2.5rem;
+  font-weight: 100;
+  font-style: italic;
+}
+
+#body-gradient__container {
   width: 100vw;
   background-image: radial-gradient(circle at 66% -166%, darkcyan, transparent 100%),
                     radial-gradient(ellipse at 133% 133%, gold, transparent 100%),
                     /* radial-gradient(circle at 66% 33%, gold, transparent 100%), */
                     radial-gradient(ellipse at 33% 66%, cadetblue, transparent 100%);
   grid-area: gradient;
+  position:relative;
 }
 
-#title {
+#body-gradient__title {
   color: white;
+  position:absolute;
+  right: 20%;
+  top: 20%;
+  font-size: 3rem;
 }
 
-#subtitle {
+#body-gradient__subtitle {
   color: white;
+  position:absolute;
+  right: 30%;
+  top: 40%;
+  font-size: 1.5rem;
 }
 
 #posts {

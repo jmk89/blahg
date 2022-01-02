@@ -9,29 +9,89 @@ html, body {
    margin: 0px;
    padding: 0px;
    overflow-x: hidden;
+   font-family: "Roboto";
+   font-weight: 300;
+}
+
+*::selection {
+  background-color: cyan;
+  color: white;
 }
 
 #content {
   margin-top: 5rem;
 }
 
-.app-header {
+.app-header__main-container {
   position: fixed;
   width: 100vw;
+  height: 5rem;
   z-index: 5;
-}
-
-.header-background {
+  border-bottom: 1px solid gainsboro;
   background-color:rgba(236, 236, 247, 0.541);
   backdrop-filter: blur(5px);
 }
 
-.header__logo-text {
-  color: black;
+.app-header__grid {
+  display: grid;
+  grid-template-columns: 10rem 4rem 4rem 1fr 8rem;
+  grid-template-rows: 5rem;
+  grid-template-areas: "logo link1 link2 filler userMenu";
+}
+
+.app-header__logo-container {
+  grid-area: logo;
+  align-self: center;
+  justify-self: center;
+}
+
+.app-header__logo-text {
+  color: lightseagreen;
+}
+
+.app-header__logo-text:hover,
+.app-header__logo-text:focus,
+.app-header__logo-text:active {
+  color: cyan;
+}
+
+.app-header__links-1 {
+  grid-area: link1;
+  align-self: center;
+  justify-self: center;
+}
+
+.app-header__links-2 {
+  grid-area: link2;
+  align-self: center;
+  justify-self: center;
+}
+
+.app-header__username {
+  grid-area: filler;
+  justify-self: end;
+  align-self: center;
+}
+
+
+
+.app-header__login-button {
+  grid-area: userMenu;
+  align-self: center;
+  justify-self: center;
+  margin-right: 2rem;
 }
 
 a {
   cursor: pointer;
+  text-decoration: none;
+  color:lightslategray;
+}
+
+a:hover,
+a:active,
+a:focus {
+  color:lightseagreen;
 }
 
 .page__title {
@@ -41,16 +101,17 @@ a {
 }
 
 .btn-primary {
-  background-color: coral;
-  border-color: coral;
+  background-color: white;
+  border: 2px solid rgb(165, 188, 211);
+  color: rgb(165, 188, 211);
 }
 
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary:focus {
   background-color: white;
-  border-color: white;
-  color: black;
+  border-color: lightseagreen;
+  color: slategray;
 }
 
 .btn-primary:disabled {
