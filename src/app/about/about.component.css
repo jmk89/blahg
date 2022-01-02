@@ -1,14 +1,66 @@
-#body__gradient {
+
+main {
+  display: grid;
+  grid-template-rows: 30rem 40vh 100rem;
+  grid-template-areas: "greeting" "gradient" "posts-content";
+}
+
+#about {
+  grid-area: greeting;
+  align-self: center;
+  justify-self: center;
+}
+
+.about__title {
+  font-size: 6rem;
+}
+
+.about__subtext {
+  font-size: 2.5rem;
+  font-weight: 100;
+  font-style: italic;
+}
+
+#body-gradient__container {
   width: 100vw;
-  height: 40vh;
   position: relative;
   background-image: radial-gradient(ellipse at top right, coral, transparent 66%),
                     radial-gradient(ellipse at top, mediumslateblue, transparent 100%),
                     radial-gradient(ellipse at -66% 20%, mediumvioletred, transparent 66%),
                     radial-gradient(ellipse at 33% 150%, mediumorchid, transparent 100%);
+  grid-area: gradient;
+  display: grid;
+  grid-template-columns: 1fr 2px 3fr;
+  grid-template-rows: 3fr 1fr;
+  grid-template-areas: "blank1 line blank2"
+                       "blank3 circle tagline";
 }
 
-.blahg-overview__slogan {
+.body-gradient__line {
+  background-image: radial-gradient(circle at bottom, white, transparent 100%);
+  grid-area: line;
+  width: 100%;
+  height: 100%;
+}
+
+.body-gradient__circle {
+  background-color: white;
+  grid-area: circle;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  justify-self: center;
+}
+
+.body-gradient__tagline {
+  color: white;
+  grid-area:tagline;
+  justify-self:start;
+  align-self: center;
+  font-weight: 100;
+}
+
+.body-gradient__title {
   position: absolute;
   right: 17.25%;
   top: 17.25%;

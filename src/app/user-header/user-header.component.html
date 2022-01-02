@@ -16,16 +16,15 @@
         <img
           src="../../assets/me.jpg"
           alt=""
-          class="d-inline-block align-text-top avatar"
+          class="d-inline-block align-text-top app-header__avatar"
         />
       </button>
       <ul class="dropdown-menu">
         <li><a class="dropdown-item" routerLink="/new">new</a></li>
         <li><a class="dropdown-item" routerLink="/profile">profile</a></li>
+        <li><a class="dropdown-item" routerLink="/about">about</a></li>
         <li><hr class="dropdown-divider" /></li>
-        <li>
-          <a class="dropdown-item" routerLink="/preferences">preferences</a>
-        </li>
+        <li><a class="dropdown-item" routerLink="/preferences">preferences</a></li>
         <li><a class="dropdown-item" (click)="onLogout()">logout</a></li>
       </ul>
     </div>

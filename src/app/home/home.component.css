@@ -26,12 +26,12 @@ main {
 
 #body-gradient__container {
   width: 100vw;
+  position:relative;
   background-image: radial-gradient(circle at 66% -166%, darkcyan, transparent 100%),
                     radial-gradient(ellipse at 133% 133%, gold, transparent 100%),
                     /* radial-gradient(circle at 66% 33%, gold, transparent 100%), */
                     radial-gradient(ellipse at 33% 66%, cadetblue, transparent 100%);
   grid-area: gradient;
-  position:relative;
 }
 
 #body-gradient__title {

@@ -1,0 +1,40 @@
+.footer__main-container {
+  height: 200px;
+  width: 100%;
+  background-color:rgba(236, 236, 247, 0.5);
+  border-top: 1px solid gainsboro;
+  display: grid;
+  grid-template-rows: 6rem 1rem 1fr;
+  grid-template-areas: "logo" "copyright" "socials";
+}
+
+.footer-logo {
+  grid-area: logo;
+  justify-self: center;
+  align-self:end;
+  color:lightseagreen;
+}
+
+.footer-copyright {
+  grid-area: copyright;
+  justify-self: center;
+  align-self: center;
+  color:slategray;
+}
+
+.footer-socials {
+  grid-area: socials;
+  justify-self: center;
+  align-self: start;
+}
+
+.footer-social {
+  margin: 0 0.5rem;
+  color: slategray;
+}
+
+.footer-social:hover,
+.footer-social:focus,
+.footer-social:active {
+  color: lightseagreen;
+}

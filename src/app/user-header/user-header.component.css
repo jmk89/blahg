@@ -1,13 +1,9 @@
-
-.avatar {
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  margin-left: .25rem;
+.dropdown-item {
+  color: slategray;
 }
 
-.username {
-  color:rgb(56, 56, 56);
-  font-family: "Roboto";
-  font-weight: 400;
+.dropdown-item:hover,
+.dropdown-item:active,
+.dropdown-item:focus {
+  background-color:rgba(236, 236, 247, 0.5);
 }

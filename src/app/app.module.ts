@@ -19,6 +19,8 @@ import {AngularFireFunctionsModule, USE_EMULATOR as USE_FUNCTIONS_EMULATOR} from
 import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire/compat';
 import {AngularFireStorageModule} from '@angular/fire/compat/storage';
+import { FooterComponent } from './footer/footer.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import {AngularFireStorageModule} from '@angular/fire/compat/storage';
     MyprofileComponent,
     NewpostComponent,
     DropdownDirective,
-    PreferencesComponent
+    PreferencesComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import {AngularFireStorageModule} from '@angular/fire/compat/storage';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule,
-    AngularFireFunctionsModule
+    AngularFireFunctionsModule,
+    FontAwesomeModule
   ],
   exports: [
     DropdownDirective

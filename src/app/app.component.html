@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
+
   <header>
     <app-user-header *ngIf="loggedIn"></app-user-header>
     <app-header *ngIf="!loggedIn"></app-header>
@@ -14,17 +15,8 @@
   <body id="content">
     <router-outlet></router-outlet>
   </body>
+
+  <footer>
+    <app-footer></app-footer>
+  </footer>
 </html>
-
-<!-- <div class="row">
-  <h2>Entries</h2>
-  <div *ngFor="let post of posts" class="col-sm-4">
-    <div class="card" style="margin-bottom: 40px">
-      <div class="card-body">
-        <h3 class="card-title">{{ post.name }}</h3>
-        <p class="card-text">{{ post.content }}</p>
-      </div>
-    </div>
-
-  </div>
-</div> -->
