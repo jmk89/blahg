@@ -4,7 +4,7 @@ body {
 
 main {
   display: grid;
-  grid-template-rows: 30rem 40vh 100rem;
+  grid-template-rows: 30rem 40vh minmax(30vh, 60vh);
   grid-template-areas: "greeting" "gradient" "posts-content";
 }
 

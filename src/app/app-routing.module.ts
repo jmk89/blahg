@@ -6,50 +6,58 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { AuthComponent } from './auth/auth.component';
-import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/compat/auth-guard';
+import {
+  AngularFireAuthGuard,
+  redirectUnauthorizedTo,
+} from '@angular/fire/compat/auth-guard';
 
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['home'])
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['home']);
 const routes: Routes = [
   {
-    path: "auth",
-    component: AuthComponent
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
   },
   {
-    path: "about",
-    component: AboutComponent
+    path: 'auth',
+    component: AuthComponent,
   },
   {
-    path: "home",
-    component: HomeComponent
+    path: 'about',
+    component: AboutComponent,
   },
   {
-    path: "profile",
+    path: 'home',
+    component: HomeComponent,
+  },
+  {
+    path: 'profile',
     component: MyprofileComponent,
     canActivate: [AngularFireAuthGuard],
     data: {
-      authGuardPipe: redirectUnauthorizedToLogin
-    }
+      authGuardPipe: redirectUnauthorizedToLogin,
+    },
   },
   {
-    path: "preferences",
+    path: 'preferences',
     component: PreferencesComponent,
     canActivate: [AngularFireAuthGuard],
     data: {
-      authGuardPipe: redirectUnauthorizedToLogin
-    }
+      authGuardPipe: redirectUnauthorizedToLogin,
+    },
   },
   {
-    path: "new",
+    path: 'new',
     component: NewpostComponent,
     canActivate: [AngularFireAuthGuard],
     data: {
-      authGuardPipe: redirectUnauthorizedToLogin
-    }
-  }
+      authGuardPipe: redirectUnauthorizedToLogin,
+    },
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

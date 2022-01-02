@@ -13,8 +13,10 @@ h3 {
 }
 
 
-.auth-container {
-
+.login-container {
+  height: calc(100vh - 200px - 5rem);
+  display: grid;
+  align-content: start;
 }
 
 
@@ -22,5 +24,5 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 5rem;
 }

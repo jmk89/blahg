@@ -1,54 +1,8 @@
 
-
-
-<div class="row">
-  <!-- <h3>log in</h3>
-    <form
-      [formGroup]="authForm"
-      (ngSubmit)="onSubmit()"
-      class="login-form"
-    >
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="email">email</span>
-                <input
-                    type="email"
-                    class="form-control"
-                    aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-default"
-                    formControlName="email"
-                >
-            </div>
-            <p *ngIf="!authForm.get('email').valid && authForm.get('email').dirty">Enter a valid email</p>
-
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="password">password</span>
-                <input
-                    type="password"
-                    class="form-control"
-                    aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-default"
-                    formControlName="password"
-                >
-            </div>
-            <p *ngIf="!authForm.get('password').valid && authForm.get('password').dirty">Enter a valid password</p>
-
-
-        <div>
-            <button class="btn btn-primary" type="submit" [disabled]="!authForm.valid && authForm.touched">{{ signup ? "sign up" : "login"}}</button> |
-            <button class="btn btn-secondary" type="button" (click)="switchMode()">{{ signup ? "switch to login" : "switch to signup"}}</button>
-        </div>
-    </form>
-    <hr> -->
-
+<div class="login-container">
     <div class="login">
-
       <h2>Sign In</h2>
 
-      <div id="firebaseui-auth-container" class="auth-container">
-
-
-      </div>
-
+      <div id="firebaseui-auth-container" class="auth-container"></div>
     </div>
-
 </div>

@@ -1,7 +1,7 @@
 
 main {
   display: grid;
-  grid-template-rows: 30rem 40vh 100rem;
+  grid-template-rows: 30rem 40vh 40rem;
   grid-template-areas: "greeting" "gradient" "posts-content";
 }
 
