@@ -74,18 +74,22 @@
   display: grid;
   justify-self: center;
   grid-template-columns: 100%;
+  grid-row-gap:1rem;
+  grid-auto-rows:max-content;
   grid-area: page-posts-list;
 }
 
+
+
 .post {
   width: 100%;
-  height: 16rem;
-  margin: 0.5rem auto;
+  height: 100%;
+  margin: 0 auto;
 }
 
 .card {
   border-radius: 1rem;
-  height: 90%;
+  height: 100%;
   border: none;
   border-top: 1px solid gainsboro;
   border-left: 1px solid gainsboro;
@@ -96,12 +100,12 @@
 
 .card-body {
   display: grid;
+  height: 100%;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 2rem 4rem 1fr 2.5rem;
+  grid-template-rows: 2rem auto auto;
   grid-template-areas: "date name"
                        "title title"
                        "preview preview"
-                       "button .";
 }
 
 .card-title {
@@ -154,21 +158,12 @@
     display:inline;
   }
 
-  .post {
-    width: 100%;
-    height: 32rem;
-    margin: 0.5rem auto;
-  }
-
-
-
   .card-body {
     display: grid;
-    grid-template-rows: 4rem 6rem 1fr 3.5rem;
+    grid-template-rows: 4rem auto auto;
     grid-template-areas: "date name"
                          "title title"
-                         "preview preview"
-                         "button .";
+                         "preview preview";
   }
 
   .card-title {
