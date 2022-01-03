@@ -40,7 +40,6 @@ export class HeaderComponent implements OnInit {
       })
     ).subscribe(segments => {
       this.url = segments.join('')
-      console.log("url updated in header ", this.url)
     });
   }
 

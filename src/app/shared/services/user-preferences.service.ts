@@ -91,8 +91,9 @@ export class UserPreferencesService {
   }
 
   displayNameGet() {
-    const data: FirebaseUser = JSON.parse(localStorage.getItem('firebaseUserData'));
-    return data.displayName;
+    // const data: FirebaseUser = JSON.parse(localStorage.getItem('firebaseUserData'));
+    // return data.displayName;
+    return JSON.parse(localStorage.getItem('userPreferences')).displayName;
   }
 
 }

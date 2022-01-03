@@ -3,41 +3,65 @@
 
 .page {
   display: grid;
-  grid-template-columns: 10rem 1fr;
+  margin: 0 auto;
+  max-width: 95vw;
+  grid-template-rows: 5rem auto;
+  grid-template-columns: 0 95vw;
+  grid-template-areas: ". page-title"
+                      "page-user-info page-posts-list";
+}
+
+.page__title {
+  grid-area: page-title;
+  align-self: center;
+  justify-self: center;
+}
+
+.page__title > h1 {
+  font-size: 3rem;
 }
 
 .user-info__container {
+  display: none;
   position: fixed;
-  width: 30vw;
+  top: 20rem;
+  width: 22vw;
+  margin-left: 8px;
 }
 
 .user-info {
   display: grid;
-  padding-left: 1rem;
+  padding-left: 0.3rem;
   grid-template-columns: 1fr;
-  grid-template-rows: 2rem 1rem auto 1rem;
+  grid-template-rows: 3rem 1.5rem 10rem 1rem;
   grid-template-areas: "user-info-name" "user-info-lastPostDate" "user-info-bio"  "user-info-misc";
   grid-row-gap: .5rem;
-  justify-content: center;
   font-family: "Roboto";
   font-weight: 300;
+  /* grid-area: page-user-info; */
 }
 
 .user-info-name {
   grid-area: user-info-name;
+  justify-self: end;
+  font-size: 3rem;
 }
 
 .user-info-bio {
-  font-size: 0.9rem;
+  font-size: 1.33rem;
   font-weight: 200;
   font-family: "Roboto Mono";
   grid-area: user-info-bio;
+  justify-self: end;
+  align-self: center;
 }
 
 .user-info-lastPostDate {
   font-weight: 100;
   font-style: italic;
-  grid-area: user-info-lastPostDate
+  font-size: 1.33rem;
+  grid-area: user-info-lastPostDate;
+  justify-self: end;
 }
 
 .user-info-misc {
@@ -47,11 +71,12 @@
 .posts {
   display: grid;
   justify-self: center;
-  grid-template-columns: repeat(2, minmax(30%, 30rem));
+  grid-template-columns: 100%;
+  grid-area: page-posts-list;
 }
 
 .post {
-  width: 90%;
+  width: 100%;
   height: 16rem;
   margin: 0.5rem auto;
 }
@@ -60,17 +85,11 @@
   border-radius: 1rem;
   height: 90%;
   border: none;
-  border-bottom: 1px solid lightgrey;
-  border-right: 1px solid lightgrey;
-}
-
-.card:hover,
-.card:active,
-.card:focus {
-  cursor: pointer;
+  border-top: 1px solid gainsboro;
+  border-left: 1px solid gainsboro;
+  border-bottom: 2px solid gainsboro;
+  border-right: 2px solid gainsboro;
   box-shadow: 6px 6px 12px rgba(255, 210, 194, 0.5);
-  border-bottom: 1px solid rgb(255, 210, 194, 0.5);
-  border-right: 1px solid rgb(255, 210, 194, 0.5);
 }
 
 .card-body {
@@ -88,6 +107,7 @@
   justify-self: center;
   font-family: "Roboto";
   font-weight: 400;
+  font-size: 2rem;
 }
 
 .name {
@@ -98,10 +118,10 @@
 }
 
 .date {
-  font-size: 0.75rem;
+  font-size: 1.25rem;
   text-align: left;
   grid-area: date;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.75);
   font-family: "Roboto";
   font-weight: 100;
   font-style: italic;
@@ -109,4 +129,59 @@
 
 .card-text {
   grid-area: preview;
+  font-size: 1.5rem;
+}
+
+@media (min-width: 40rem) {
+  .page {
+    display: grid;
+    margin: 0 auto;
+    max-width: 95vw;
+    grid-template-rows: 7rem auto;
+    grid-template-columns: 23vw 1fr;
+    grid-template-areas: ". page-title"
+                        "page-user-info page-posts-list";
+  }
+
+  .page__title > h1 {
+    font-size: 6rem;
+  }
+
+  .user-info__container {
+    display:inline;
+  }
+
+  .post {
+    width: 100%;
+    height: 32rem;
+    margin: 0.5rem auto;
+  }
+
+
+
+  .card-body {
+    display: grid;
+    grid-template-rows: 4rem 6rem 1fr 3.5rem;
+    grid-template-areas: "date name"
+                         "title title"
+                         "preview preview"
+                         "button .";
+  }
+
+  .card-title {
+    font-size: 5rem;
+  }
+
+  .name {
+    font-size: 2rem;
+  }
+
+  .date {
+    font-size: 1.25rem;
+  }
+  .card-text {
+    font-size: 3rem;
+    grid-area: preview;
+  }
+
 }

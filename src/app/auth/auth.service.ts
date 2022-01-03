@@ -58,8 +58,9 @@ export class AuthService {
             }
         ).pipe(
             tap(response => {
-                this.handleAuth(response.email, response.localId, response.idToken, +response.expiresIn)
                 this.userService.updateLocalStorageWithDBPrefs(response.localId).subscribe();
+                this.handleAuth(response.email, response.localId, response.idToken, +response.expiresIn)
+
             })
         );
     }
@@ -100,6 +101,7 @@ export class AuthService {
         const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
         const user = new AuthUser(email, userID, token, expirationDate);
         this.user.next(user)
+
         localStorage.setItem('userData', JSON.stringify(user));
     }
 

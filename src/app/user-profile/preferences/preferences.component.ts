@@ -19,7 +19,7 @@ export class PreferencesComponent implements OnInit, OnDestroy {
   constructor(
     private userPreferencesService: UserPreferencesService,
     private user: UserService) {
-      this.userData = this.user.getLocalUserData();
+      this.userData = this.user.getLocalUserAuthData();
      }
 
   ngOnInit(): void {
@@ -41,7 +41,7 @@ export class PreferencesComponent implements OnInit, OnDestroy {
         this.prefs = res;
         this.userPreferences.setValue(
           {
-            displayName: this.userPreferencesService.displayNameGet(),
+            displayName: this.prefs.displayName,
             publicEmail: this.prefs.publicEmail,
             bio: this.prefs.bio
           }

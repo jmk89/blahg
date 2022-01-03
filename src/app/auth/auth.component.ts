@@ -58,7 +58,6 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   onLoginSuccessful(result) {
-    console.log('firebase ui result: ', result);
     this.router.navigateByUrl('/profile');
   }
 

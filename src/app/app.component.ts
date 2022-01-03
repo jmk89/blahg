@@ -36,6 +36,5 @@ export class AppComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.activeUrl = this.router.url;
-    console.log('app url', this.activeUrl);
   }
 }

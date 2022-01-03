@@ -72,7 +72,7 @@ export class UserService {
       localStorage.removeItem('userPreferences');
      }
 
-     getLocalUserData(): UserData {
+     getLocalUserAuthData(): UserData {
        return <UserData>JSON.parse(localStorage.getItem('firebaseUserData'));
      }
 

@@ -4,7 +4,10 @@
       <h3 class="app-header__logo-text">blahget</h3>
     </a>
 
-    <h4 class="app-header__username">{{ username | lowercase }}</h4>
+    <ng-container *ngIf="prefs$ | async as preferences">
+      <h4 class="app-header__username">{{ preferences.displayName | lowercase }}</h4>
+    </ng-container>
+
 
     <div class="btn-group dropstart app-header__login-button">
       <button

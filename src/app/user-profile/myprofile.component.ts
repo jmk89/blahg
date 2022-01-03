@@ -37,7 +37,7 @@ export class MyprofileComponent implements OnInit, OnDestroy {
     });
 
     this.prefs$ = this.userPreferences.updateLocalStorageWithDBPrefs(
-      this.userService.getLocalUserData().uid
+      this.userService.getLocalUserAuthData().uid
     );
     this.prefs$.subscribe();
 
