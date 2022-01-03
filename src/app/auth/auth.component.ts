@@ -2,7 +2,6 @@ import {
   UserPreferencesData,
   UserPreferencesService,
 } from './../shared/services/user-preferences.service';
-import { AuthResponseData } from './auth.service';
 import { FormGroup } from '@angular/forms';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -22,7 +21,6 @@ import { UserService } from '../shared/services/user.service';
 export class AuthComponent implements OnInit, OnDestroy {
   signup = false;
   authForm: FormGroup;
-  authObservable: Observable<AuthResponseData>;
   userObservable: Observable<UserPreferencesData>;
   isLoading = false;
 
@@ -30,8 +28,9 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private afAuth: AngularFireAuth
-  ) {}
+    private afAuth: AngularFireAuth,
+    private prefs: UserPreferencesService,
+    private user: UserService) {}
 
   ngOnInit(): void {
     //angular fire auth returns a promise "app"
@@ -58,7 +57,23 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   onLoginSuccessful(result) {
-    this.router.navigateByUrl('/profile');
+    let uid: string;
+    //don't like the subscription within subscription
+    this.user.userData$.subscribe(result => {
+      uid = result.uid
+      this.prefs.readDBPrefs().subscribe(
+        result => {
+          if (!result) {
+            this.prefs.createUserPreferences(uid)
+          } else {
+            this.prefs.setLocalStoragePrefs(result)
+          }
+        }
+      )
+
+      this.router.navigateByUrl('/profile');
+    });
+
   }
 
   ngOnDestroy(): void {

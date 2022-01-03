@@ -1,7 +1,5 @@
 import { UserPreferencesData, UserPreferencesService } from './../shared/services/user-preferences.service';
-import { AuthService } from './../auth/auth.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { AuthUser } from '../shared/models/auth-user.model';
 import { UserService } from '../shared/services/user.service';
 import { Observable } from 'rxjs';
 
@@ -17,11 +15,11 @@ export class UserHeaderComponent implements OnInit {
     private user: UserService,
     private prefs: UserPreferencesService
     ) {
-      this.prefs$ = this.prefs.updateLocalStorageWithDBPrefs(this.user.getLocalUserAuthData().uid);
+
      }
 
   ngOnInit(): void {
-
+    this.prefs$ = this.prefs.readDBPrefs();
   }
 
   onLogout() {

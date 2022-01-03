@@ -1,18 +1,13 @@
 import {
   ActivatedRoute,
   NavigationEnd,
-  Router,
-  UrlSegment,
+  Router
 } from '@angular/router';
-import { AuthService } from './../auth/auth.service';
 import {
   Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
+  OnInit
 } from '@angular/core';
-import { map, Subscription, tap, Observable, filter } from 'rxjs';
+import { map, Subscription, filter } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -25,7 +20,6 @@ export class HeaderComponent implements OnInit {
   url: string;
 
   constructor(
-    private authService: AuthService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {
@@ -44,7 +38,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userSub = this.authService.user.subscribe();
+
   }
 
   ngOnDestroy() {

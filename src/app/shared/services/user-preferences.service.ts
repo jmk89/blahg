@@ -23,7 +23,7 @@ export class UserPreferencesService {
     private db: AngularFirestore) {
   }
 
-  createUserPreferences(userID: string): Observable<any> {
+  createUserPreferences(userID: string) {
     const userData: {
       email: string,
       displayName: string,
@@ -34,7 +34,6 @@ export class UserPreferencesService {
         return;
     }
 
-    const path = 'users';
     const newUser: UserPreferencesData = {
       userID: userData.uid,
       displayName: userData.displayName,
@@ -42,30 +41,11 @@ export class UserPreferencesService {
       bio: ""
     }
 
-    return from(this.db.doc(`users/${userID}`).set(newUser))
-      .pipe(
-        tap(() => {
-          this.updateLocalStorageWithDBPrefs(userID).subscribe();
-        })
-      );
+    this.setLocalStoragePrefs(newUser);
+    from(this.db.doc(`users/${userID}`).set(newUser)).subscribe();
   }
 
-  updateLocalStorageWithDBPrefs(userID: string) {
-    return this.db.collection(
-      `users`,
-      ref => ref.where('userID', '==', userID))
-      .get()
-      .pipe(
-        map(result => convertSnaps<UserPreferencesData>(result)[0]),
-        tap(result => {
-          let userPrefs = result;
-          this.handleUserPreferences(userPrefs);
-        })
-      );
-
-  }
-
-  updateUserPreferences(prefs: UserPreferencesData) {
+  readDBPrefs() {
     const userData: {
       email: string,
       displayName: string,
@@ -78,15 +58,41 @@ export class UserPreferencesService {
 
     const userID = userData.uid;
 
-    return from(this.db.doc<UserPreferencesData>(`users/${userID}`).update(prefs))
+    return this.db.collection(
+      'users',
+      ref => ref.where('userID', '==', userID))
+      .get()
       .pipe(
-        tap(() => {
-          this.handleUserPreferences(prefs);
-        })
-      );
+        tap(result => console.log("before map", result)),
+        map(result => convertSnaps<UserPreferencesData>(result)[0]),
+        tap(result => console.log("after map", result))
+      )
   }
 
-  handleUserPreferences(prefs: UserPreferencesData) {
+  //updates locally and in DB
+  updateUserPrefs(prefs: UserPreferencesData) {
+    const userData: {
+      email: string,
+      displayName: string,
+      pictureUrl: string,
+      uid: string
+    } = JSON.parse(localStorage.getItem('firebaseUserData'));
+    if (!userData) {
+        return;
+    }
+
+    const userID = userData.uid;
+
+    from(this.db.doc<UserPreferencesData>(`users/${userID}`).update(prefs))
+      .pipe(
+        tap(() => {
+          this.setLocalStoragePrefs(prefs);
+        })
+      )
+      .subscribe();
+  }
+
+  setLocalStoragePrefs(prefs: UserPreferencesData) {
     localStorage.setItem('userPreferences', JSON.stringify(prefs));
   }
 

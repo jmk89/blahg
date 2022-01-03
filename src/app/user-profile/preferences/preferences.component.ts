@@ -1,9 +1,8 @@
 import { UserService, UserData } from './../../shared/services/user.service';
-import { Subscription, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { UserPreferencesData, UserPreferencesService } from './../../shared/services/user-preferences.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-preferences',
@@ -30,11 +29,7 @@ export class PreferencesComponent implements OnInit, OnDestroy {
 
     });
 
-    this.prefs$ = this.userPreferencesService.updateLocalStorageWithDBPrefs(this.userData.uid);
-    if (!this.prefs$) {
-      this.userPreferencesService.createUserPreferences(this.userData.uid).subscribe();
-      this.prefs$ = this.userPreferencesService.updateLocalStorageWithDBPrefs(this.userData.uid);
-    }
+    this.prefs$ = this.userPreferencesService.readDBPrefs();
 
     this.prefs$
       .subscribe(res => {
@@ -65,8 +60,7 @@ export class PreferencesComponent implements OnInit, OnDestroy {
       publicEmail: publicEmail,
       bio: bio
     }
-    this.userPreferencesService.updateUserPreferences(userPrefs)
-      .subscribe();
+    this.userPreferencesService.updateUserPrefs(userPrefs);
   }
 
 }
