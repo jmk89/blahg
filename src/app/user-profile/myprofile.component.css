@@ -1,9 +1,14 @@
+.preferences__container {
 
+  display: grid;
+  align-content: start;
+}
 
 
 .page {
   display: grid;
   margin: 0 auto;
+  height: calc(100vh - 200px - 5rem);
   max-width: 95vw;
   grid-template-rows: 5rem auto;
   grid-template-columns: 0 95vw;

@@ -23,7 +23,7 @@ export class FirestorePostService {
   getRecentPosts(limit: number) {
     return this.db.collection(
       'posts',
-      ref => ref.orderBy('postID', 'desc').limit(limit)
+      ref => ref.orderBy('postDate', 'desc').limit(limit)
     )
     .get()
     .pipe(

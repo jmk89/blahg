@@ -27,7 +27,7 @@ export class NewpostComponent implements OnInit, OnDestroy {
         null,
         [
           Validators.required,
-          Validators.maxLength(100)
+          Validators.maxLength(60)
         ]
       ),
       'body': new FormControl(

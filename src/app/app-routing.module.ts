@@ -1,3 +1,4 @@
+import { PostComponent } from './post/post.component';
 import { PreferencesComponent } from './user-profile/preferences/preferences.component';
 import { NewpostComponent } from './newpost/newpost.component';
 import { MyprofileComponent } from './user-profile/myprofile.component';
@@ -31,7 +32,7 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'profile',
+    path: 'profile/:userID',
     component: MyprofileComponent,
     canActivate: [AngularFireAuthGuard],
     data: {
@@ -53,6 +54,10 @@ const routes: Routes = [
     data: {
       authGuardPipe: redirectUnauthorizedToLogin,
     },
+  },
+  {
+    path: 'post/:postID',
+    component: PostComponent
   },
 ];
 
