@@ -9,6 +9,7 @@
   grid-template-columns: 0 95vw;
   grid-template-areas: ". page-title"
                       "page-user-info page-posts-list";
+  background-color: transparent;
 }
 
 .page__title {
@@ -45,6 +46,7 @@
   grid-area: user-info-name;
   justify-self: end;
   font-size: 3rem;
+  color: rgb(159, 168, 173);
 }
 
 .user-info-bio {
@@ -130,6 +132,7 @@
 .card-text {
   grid-area: preview;
   font-size: 1.5rem;
+  color: rgb(159, 168, 173);
 }
 
 @media (min-width: 40rem) {

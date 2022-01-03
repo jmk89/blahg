@@ -34,7 +34,7 @@ html, body {
 
 .app-header__grid {
   display: grid;
-  grid-template-columns: 10rem 4rem 4rem 1fr 8rem;
+  grid-template-columns: 8rem 4rem 4rem 1fr auto;
   grid-template-rows: 5rem;
   grid-template-areas: "logo link1 link2 filler userMenu";
 }
