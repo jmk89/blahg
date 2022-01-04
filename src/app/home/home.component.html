@@ -21,7 +21,7 @@
       <section id="posts">
         <div class="posts">
           <div class="post" #post *ngFor="let post of posts">
-            <div class="card" (click)="goToPost(post)">
+            <div class="card" (click)="goToPost(post)" routerLink='/{{post.userID}}/posts/{{post.postID}}'>
               <!-- <img src="..." class="card-img-top" alt="..."> -->
               <div class="card-body">
                 <h6 *ngIf="post.postDate" class="mb-2 date">

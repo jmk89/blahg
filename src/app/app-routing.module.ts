@@ -32,7 +32,7 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'profile/:userID',
+    path: 'profile',
     component: MyprofileComponent,
     canActivate: [AngularFireAuthGuard],
     data: {
@@ -56,7 +56,7 @@ const routes: Routes = [
     },
   },
   {
-    path: 'post/:postID',
+    path: ':userID/posts/:postID',
     component: PostComponent
   },
 ];

@@ -63,9 +63,7 @@ export class UserPreferencesService {
       ref => ref.where('userID', '==', userID))
       .get()
       .pipe(
-        tap(result => console.log("before map", result)),
         map(result => convertSnaps<UserPreferencesData>(result)[0]),
-        tap(result => console.log("after map", result))
       )
   }
 

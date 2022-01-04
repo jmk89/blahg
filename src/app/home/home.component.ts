@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   }
 
   goToPost(f: FormControl) {
-
+    console.log(f);
   }
 
 }

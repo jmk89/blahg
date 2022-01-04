@@ -42,6 +42,20 @@ export class FirestorePostService {
     )
   }
 
+  getUserPost(user: string, postID: number) {
+    return this.db.collection(
+      `users/${user}/posts`,
+      ref => ref.where('postID', '==', postID)
+    )
+    .get()
+    .pipe(
+      map(querySnap => {
+        let post = <PostData2>querySnap.docs[0].data();
+        return post;
+      })
+    )
+  }
+
   addPost(post: Partial<PostData2>): Observable<any> {
     const path = `users/${post.userID}/posts`
     return this.db.collection(
