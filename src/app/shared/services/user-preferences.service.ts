@@ -9,7 +9,9 @@ export interface UserPreferencesData {
   userID: string,
   displayName: string,
   publicEmail: boolean,
-  bio: string
+  bio: string,
+  github?: string,
+  linkedin?: string
 }
 
 @Injectable({providedIn: 'root'})
@@ -38,7 +40,9 @@ export class UserPreferencesService {
       userID: userData.uid,
       displayName: userData.displayName,
       publicEmail: false,
-      bio: ""
+      bio: "",
+      github: "",
+      linkedin: ""
     }
 
     this.setLocalStoragePrefs(newUser);

@@ -24,8 +24,10 @@ export class PreferencesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userPreferences = new FormGroup({
       'displayName' : new FormControl("", [Validators.minLength(3), Validators.maxLength(16)]),
-      'publicEmail': new FormControl(true, Validators.required),
       'bio': new FormControl("", Validators.maxLength(800)),
+      'publicEmail': new FormControl(true, Validators.required),
+      'github': new FormControl(""),
+      'linkedin': new FormControl("")
 
     });
 
@@ -38,7 +40,9 @@ export class PreferencesComponent implements OnInit, OnDestroy {
           {
             displayName: this.prefs.displayName,
             publicEmail: this.prefs.publicEmail,
-            bio: this.prefs.bio
+            bio: this.prefs.bio,
+            linkedin: this.prefs.linkedin ? this.prefs.linkedin : "",
+            github: this.prefs.github ? this.prefs.github : ""
           }
           );
       });
@@ -53,12 +57,16 @@ export class PreferencesComponent implements OnInit, OnDestroy {
     const displayName = this.userPreferences.controls['displayName'].value;
     const publicEmail = this.userPreferences.controls['publicEmail'].value;
     const bio = this.userPreferences.controls['bio'].value;
+    const linkedin = this.userPreferences.controls['linkedin'].value;
+    const github = this.userPreferences.controls['github'].value;
 
     const userPrefs: UserPreferencesData = {
       userID: this.userData.uid,
       displayName: displayName,
       publicEmail: publicEmail,
-      bio: bio
+      bio: bio,
+      linkedin: linkedin,
+      github: github
     }
     this.userPreferencesService.updateUserPrefs(userPrefs);
   }
