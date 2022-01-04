@@ -6,7 +6,19 @@
       <h2 class="user-info-name">{{ preferences.displayName }}</h2>
       <h6 class="user-info-bio">"{{ preferences.bio }}"</h6>
       <h6 class="user-info-lastPostDate">Dec 30, 2021</h6>
-      <h6 class="user-info-misc">misc info</h6>
+      <div class="user-info__socials">
+        <ng-container *ngIf="preferences.linkedin">
+          <a class="user-info__socials-linkedin" [href]=preferences.linkedin>
+            <fa-icon class="footer-social" [icon]="faLinkedin" size="2x"></fa-icon>
+          </a>
+        </ng-container>
+        <ng-container *ngIf="preferences.github">
+          <a class="user-info__socials-github" [href]=preferences.github>
+            <fa-icon class="footer-social" [icon]="faGithub" size="2x"></fa-icon>
+          </a>
+        </ng-container>
+      </div>
+
     </ng-container>
   </div>
 </div>

@@ -33,7 +33,10 @@
   padding-left: 0.3rem;
   grid-template-columns: 1fr;
   grid-template-rows: 3rem 1.5rem 10rem 1rem;
-  grid-template-areas: "user-info-name" "user-info-lastPostDate" "user-info-bio"  "user-info-misc";
+  grid-template-areas: "user-info__name"
+                       "user-info__lastPostDate"
+                       "user-info__bio"
+                       "user-info__socials";
   grid-row-gap: .5rem;
   font-family: "Roboto";
   font-weight: 300;
@@ -41,7 +44,7 @@
 }
 
 .user-info-name {
-  grid-area: user-info-name;
+  grid-area: user-info__name;
   justify-self: end;
   font-size: 3rem;
   color: rgb(159, 168, 173);
@@ -51,7 +54,7 @@
   font-size: 1.33rem;
   font-weight: 200;
   font-family: "Roboto Mono";
-  grid-area: user-info-bio;
+  grid-area: user-info__bio;
   justify-self: end;
   align-self: center;
 }
@@ -60,12 +63,23 @@
   font-weight: 100;
   font-style: italic;
   font-size: 1.33rem;
-  grid-area: user-info-lastPostDate;
+  grid-area: user-info__lastPostDate;
   justify-self: end;
 }
 
-.user-info-misc {
-  grid-area: user-info-misc;
+.user-info__socials {
+  grid-area: user-info__socials;
+  display: grid;
+  grid-template-columns: 30px 30px;
+  grid-template-areas: "linkedin github";
+}
+
+.user-info__socials-linkedin {
+  grid-area: linkedin;
+}
+
+.user-info__socials-github {
+  grid-area: github;
 }
 
 .posts {

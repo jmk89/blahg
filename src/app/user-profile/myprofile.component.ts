@@ -12,6 +12,7 @@ import {
   UserPreferencesService,
 } from '../shared/services/user-preferences.service';
 import { UserService } from '../shared/services/user.service';
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 
 @Component({
   selector: 'app-myprofile',
@@ -24,6 +25,9 @@ export class MyprofileComponent implements OnInit, OnDestroy {
   prefs$: Observable<UserPreferencesData>;
 
   user: FirebaseUser;
+
+  faGithub = faGithub;
+  faLinkedin = faLinkedin;
 
   constructor(
     private firestorePostService: FirestorePostService,
