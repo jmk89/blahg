@@ -4,7 +4,6 @@ import {
   PostData2,
 } from './../shared/services/firestorePost.service';
 import { Observable } from 'rxjs';
-import { AuthUser } from '../shared/models/auth-user.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FirebaseUser } from '../shared/models/firebase-user.model';
 import {
