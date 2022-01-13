@@ -2,9 +2,9 @@
 .page {
   display: grid;
   margin: 0 auto;
-  height: 600px;
+  height: auto;
   max-width: 95vw;
-  grid-template-rows: auto;
+  grid-template-rows: minmax(calc(100vh - 8rem - 5rem), auto);
   grid-template-columns: 1fr 95vw;
   grid-template-areas: "page-user-info post";
   background-color: transparent;
@@ -19,7 +19,7 @@
     display: grid;
     margin: 0 auto;
     max-width: 95vw;
-    grid-template-rows: auto;
+    grid-template-rows: minmax(calc(100vh - 8rem - 5rem), auto);
     grid-template-columns: 23vw 1fr;
     grid-template-areas: "page-user-info post";
   }
