@@ -1,0 +1,34 @@
+
+.page {
+  display: grid;
+  margin: 0 auto;
+  height: 600px;
+  max-width: 95vw;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 95vw;
+  grid-template-areas: "page-user-info post";
+  background-color: transparent;
+}
+
+.post-container {
+  grid-area: post;
+}
+
+@media (min-width: 40rem) {
+  .page {
+    display: grid;
+    margin: 0 auto;
+    max-width: 95vw;
+    grid-template-rows: auto;
+    grid-template-columns: 23vw 1fr;
+    grid-template-areas: "page-user-info post";
+  }
+
+  .page__title > h1 {
+    font-size: 6rem;
+  }
+
+  .user-info__container {
+    display:inline;
+  }
+}

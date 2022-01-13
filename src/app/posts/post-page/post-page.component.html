@@ -1,0 +1,7 @@
+<main class="page">
+
+  <div class="post-container" *ngIf="post$ | async as post">
+    <app-post [post]=post></app-post>
+  </div>
+
+</main>
