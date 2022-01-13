@@ -1,6 +1,6 @@
-import { PostComponent } from './post/post.component';
+import { PostPageComponent } from './posts/post-page/post-page.component';
 import { PreferencesComponent } from './user-profile/preferences/preferences.component';
-import { NewpostComponent } from './newpost/newpost.component';
+import { NewpostComponent } from './posts/newpost/newpost.component';
 import { MyprofileComponent } from './user-profile/myprofile.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
@@ -57,7 +57,7 @@ const routes: Routes = [
   },
   {
     path: ':userID/posts/:postID',
-    component: PostComponent
+    component: PostPageComponent
   },
 ];
 

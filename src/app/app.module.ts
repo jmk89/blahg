@@ -11,7 +11,7 @@ import { UserHeaderComponent } from './user-header/user-header.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { MyprofileComponent } from './user-profile/myprofile.component';
-import { NewpostComponent } from './newpost/newpost.component';
+import { NewpostComponent } from './posts/newpost/newpost.component';
 import { PreferencesComponent } from './user-profile/preferences/preferences.component';
 import {AngularFireAuthModule, USE_EMULATOR as USE_AUTH_EMULATOR} from '@angular/fire/compat/auth';
 import {AngularFirestoreModule, USE_EMULATOR as USE_FIRESTORE_EMULATOR} from '@angular/fire/compat/firestore';
@@ -21,7 +21,8 @@ import {AngularFireModule} from '@angular/fire/compat';
 import {AngularFireStorageModule} from '@angular/fire/compat/storage';
 import { FooterComponent } from './footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { PostComponent } from './post/post.component';
+import { PostPageComponent } from './posts/post-page/post-page.component';
+import { PostComponent } from './posts/post/post.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { PostComponent } from './post/post.component';
     DropdownDirective,
     PreferencesComponent,
     FooterComponent,
+    PostPageComponent,
     PostComponent
   ],
   imports: [

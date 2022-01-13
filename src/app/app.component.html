@@ -7,16 +7,23 @@
     <title>Document</title>
   </head>
 
-  <header>
-    <app-user-header *ngIf="loggedIn"></app-user-header>
-    <app-header *ngIf="!loggedIn"></app-header>
-  </header>
 
-  <body id="content">
-    <router-outlet></router-outlet>
+
+  <body>
+    <header id="header">
+      <app-user-header *ngIf="loggedIn"></app-user-header>
+      <app-header *ngIf="!loggedIn"></app-header>
+    </header>
+
+    <div id="page-content">
+      <router-outlet></router-outlet>
+    </div>
+
+
+    <footer id="footer">
+      <app-footer></app-footer>
+    </footer>
   </body>
 
-  <footer>
-    <app-footer></app-footer>
-  </footer>
+
 </html>
